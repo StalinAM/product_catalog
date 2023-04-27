@@ -1,5 +1,12 @@
 import styled from 'styled-components'
 
+export const MainC = styled.main`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 1rem 4rem 1rem;
+  min-height: 100vh;
+`
 export const InputsC = styled.div`
   display: flex;
   flex-direction: column;
@@ -75,4 +82,29 @@ export const Backdrop = styled.div`
   width: 100%;
   height: calc(100vh-48px);
   backdrop-filter: brightness(0.7);
+`
+export const Back = styled.div`
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.theme.white};
+  border-radius: 50%;
+  i {
+    font-size: 2.375rem;
+    &:hover {
+      color: ${(props) => props.theme.pink_500};
+    }
+  }
+`
+export const Header = styled.section`
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h1 {
+    font-size: ${(props) => props.theme.font_20};
+    font-weight: bold;
+  }
 `
