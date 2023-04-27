@@ -33,7 +33,7 @@ export default Menu
 const Container = styled.header`
   display: flex;
   align-items: center;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
