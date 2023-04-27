@@ -27,8 +27,8 @@ function FilterModal() {
           </RadioBtnsC>
         </InputsC>
         <ButtonsC>
-          <Button>Limpiar</Button>
           <Button>Aplicar</Button>
+          <Button>Cancelar</Button>
         </ButtonsC>
       </FormC>
     </Backdrop>
