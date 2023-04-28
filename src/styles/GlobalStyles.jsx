@@ -21,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
         outline: none;
     }
     img{
+        width: 100%;
         height: auto;
         display: block;
     }
