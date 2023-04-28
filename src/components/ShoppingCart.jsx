@@ -138,9 +138,6 @@ const Product = styled.article`
   picture {
     border-radius: 18px;
     overflow: hidden;
-    img {
-      width: 100%;
-    }
   }
   section {
     display: flex;
