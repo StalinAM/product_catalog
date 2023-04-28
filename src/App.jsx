@@ -5,6 +5,7 @@ import { light } from './styles/Theme'
 import Login from './components/Login'
 import NewProduct from './components/NewProduct'
 import ShoppingCart from './components/ShoppingCart'
+import ProductDescription from './components/ProductDescription'
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <GlobalStyles theme={light} />
       <ThemeProvider theme={light}>
         <Menu />
-        <ShoppingCart />
+        <ProductDescription />
       </ThemeProvider>
     </>
   )
