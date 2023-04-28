@@ -21,6 +21,7 @@ function ProductDescription() {
         <img src={img3} alt='' />
         <img src={img4} alt='' />
       </SlideC>
+      <div></div>
     </MainC>
   )
 }
