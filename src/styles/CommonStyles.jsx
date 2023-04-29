@@ -108,3 +108,9 @@ export const Header = styled.section`
     font-weight: bold;
   }
 `
+export const Line = styled.span`
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+  background-color: ${(props) => props.theme.black};
+`
