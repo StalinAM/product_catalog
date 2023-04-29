@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Back, Button, Header, MainC } from '../styles/CommonStyles'
+import { Back, Button, Header, Line, MainC } from '../styles/CommonStyles'
 import product from '../assets/product.jpg'
 import product2 from '../assets/product2.webp'
 
@@ -13,13 +13,6 @@ function ShoppingCart() {
         </Back>
         <h1>Carro de compras</h1>
       </Header>
-      <SectionH>
-        <HeaderS>
-          <i className='uil uil-shopping-cart' />
-          <h2>Número de productos</h2>
-        </HeaderS>
-        <span>4</span>
-      </SectionH>
       <section>
         <ListProducts>
           <li>
@@ -72,6 +65,7 @@ function ShoppingCart() {
           </li>
         </ListProducts>
       </section>
+      <Line />
       <Total>
         <p>Total a pagar:</p>
         <span>$29.13</span>
@@ -82,27 +76,7 @@ function ShoppingCart() {
 }
 
 export default ShoppingCart
-const SectionH = styled.section`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: ${(props) => props.theme.pink_400};
-  span {
-    font-size: 1.75rem;
-    font-weight: bold;
-  }
-`
-const HeaderS = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  h2 {
-    font-size: ${(props) => props.theme.font_16};
-  }
-  i {
-    font-size: 1.5rem;
-  }
-`
+
 const NumberP = styled.div`
   display: flex;
   width: fit-content;
@@ -166,15 +140,8 @@ const Product = styled.article`
 const ListProducts = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  li {
-    padding-top: 1rem;
-    border-top: 2px solid ${(props) => props.theme.pink_400};
-  }
-  li:last-child {
-    padding-bottom: 1rem;
-    border-bottom: 2px solid ${(props) => props.theme.pink_400};
-  }
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
 `
 const Total = styled.div`
   display: flex;
