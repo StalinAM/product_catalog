@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 function Menu() {
   const DATA = [
-    { id: 1, link: '#', title: 'Home', icon: 'uil uil-estate' },
+    { id: 1, link: '#', title: 'Inicio', icon: 'uil uil-estate' },
     {
       id: 2,
       link: '#about',
@@ -15,10 +15,12 @@ function Menu() {
   ]
   return (
     <Container>
+      <h1>DS</h1>
       <Content>
         <ul>
           {DATA.map((item) => (
             <Item key={item.id}>
+              {item.id === 3 && <NumProduct>5</NumProduct>}
               <Icon className={`uil uil-${item.icon}`} />
             </Item>
           ))}
@@ -42,6 +44,18 @@ const Container = styled.header`
   background-color: ${(props) => props.theme.white};
   padding: 0 2rem;
   z-index: 10;
+  h1 {
+    display: none;
+  }
+  @media screen and (min-width: 768px) {
+    padding: 3rem 4rem;
+    position: relative;
+    justify-content: space-between;
+    h1 {
+      font-size: 3rem;
+      display: block;
+    }
+  }
 `
 const Content = styled.nav`
   width: 100%;
@@ -51,10 +65,18 @@ const Content = styled.nav`
     align-items: center;
     gap: 1rem;
   }
+  @media screen and (min-width: 768px) {
+    width: auto;
+    ul {
+      justify-content: flex-end;
+      gap: 2rem;
+    }
+  }
 `
 const Item = styled.li`
   width: auto;
   position: relative;
+  cursor: pointer;
   &::before {
     content: '';
     position: absolute;
@@ -72,4 +94,20 @@ const Item = styled.li`
 const Icon = styled.i`
   font-size: 1.75rem;
   color: ${(props) => props.theme.gray_500};
+  @media screen and (min-width: 768px) {
+    color: ${(props) => props.theme.black}
+  }
+`
+const NumProduct = styled.span`
+  position: absolute;
+  right: -6px;
+  top: 3px;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: ${(props) => props.theme.pink_500};
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 14px;
+  color: ${(props) => props.theme.white};
+  text-align: center;
 `
