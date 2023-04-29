@@ -46,7 +46,7 @@ const SlideC = styled.div`
       cursor: pointer;
       width: 200px;
       opacity: 1;
-      filter: contrast(120%);
+      filter: contrast(110%);
     }
   }
 `
