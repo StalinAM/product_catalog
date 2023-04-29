@@ -47,7 +47,7 @@ const GlobalStyles = createGlobalStyle`
     body::-webkit-scrollbar {
         width: 8px;
         background-color: ${(props) =>
-          props.theme.gray_200}             /* width of the entire scrollbar */
+          props.theme.pink_400}             /* width of the entire scrollbar */
     }
     body::-webkit-scrollbar-track {
         background: ${(props) =>
@@ -55,9 +55,8 @@ const GlobalStyles = createGlobalStyle`
     }
     body::-webkit-scrollbar-thumb {
         background-color: ${(props) =>
-          props.theme.gray_200};    /* color of the scroll thumb */
+          props.theme.pink_400};    /* color of the scroll thumb */
         border-radius: 20px;       /* roundness of the scroll thumb */
-        border: 1px solid ${(props) => props.theme.pink};
     }
 `
 export default GlobalStyles
