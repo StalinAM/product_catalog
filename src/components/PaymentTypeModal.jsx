@@ -65,11 +65,18 @@ const Modal = styled.div`
     text-align: right;
     font-weight: bold;
   }
+  @media screen and (min-width: 768px) {
+    padding: 2rem;
+    width: 510px;
+    h4 {
+      font-size: ${(props) => props.theme.font_20};
+    }
+  }
 `
 const FormC = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   button {
     margin-top: 1.5rem;
   }
@@ -78,6 +85,9 @@ const RadioBtnsC = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  @media screen and (min-width: 768px) {
+    gap: 2rem;
+  }
 `
 const Information = styled.div`
   display: flex;
@@ -91,11 +101,19 @@ const Information = styled.div`
     color: ${(props) => props.theme.gray_400};
     font-size: ${(props) => props.theme.font_12};
   }
+  @media screen and (min-width: 768px) {
+    span {
+      font-size: ${(props) => props.theme.font_14};
+    }
+  }
 `
 const ButtonsC = styled.div`
   display: flex;
   gap: 1rem;
   button {
     margin-top: 0;
+  }
+  @media screen and (min-width: 768px) {
+    gap: 2rem;
   }
 `
