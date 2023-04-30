@@ -1,6 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Back, Button, Header, Line, MainC } from '../styles/CommonStyles'
+import {
+  Back,
+  Button,
+  ButtonC,
+  Header,
+  Line,
+  MainC
+} from '../styles/CommonStyles'
 import product from '../assets/product.jpg'
 import product2 from '../assets/product2.webp'
 
@@ -13,7 +20,7 @@ function ShoppingCart() {
         </Back>
         <h1>Carro de compras</h1>
       </Header>
-      <section>
+      <Content>
         <ListProducts>
           <li>
             <Product>
@@ -27,15 +34,20 @@ function ShoppingCart() {
                   unidades en total).
                 </p>
                 <span>$10.14</span>
-                <NumberP>
-                  <button>
-                    <i className='uil uil-minus' />
-                  </button>
-                  <span>1</span>
-                  <button>
-                    <i className='uil uil-plus' />
-                  </button>
-                </NumberP>
+                <EditProduct>
+                  <NumberP>
+                    <ButtonC>
+                      <i className='uil uil-minus' />
+                    </ButtonC>
+                    <span>1</span>
+                    <ButtonC>
+                      <i className='uil uil-plus' />
+                    </ButtonC>
+                  </NumberP>
+                  <ButtonC>
+                    <i className='uil uil-trash-alt' />
+                  </ButtonC>
+                </EditProduct>
               </section>
             </Product>
           </li>
@@ -51,57 +63,68 @@ function ShoppingCart() {
                   unisex con agujeros de Eva suave.
                 </p>
                 <span>$18.99</span>
-                <NumberP>
-                  <button>
-                    <i className='uil uil-minus' />
-                  </button>
-                  <span>1</span>
-                  <button>
-                    <i className='uil uil-plus' />
-                  </button>
-                </NumberP>
+                <EditProduct>
+                  <NumberP>
+                    <ButtonC>
+                      <i className='uil uil-minus' />
+                    </ButtonC>
+                    <span>1</span>
+                    <ButtonC>
+                      <i className='uil uil-plus' />
+                    </ButtonC>
+                  </NumberP>
+                  <ButtonC>
+                    <i className='uil uil-trash-alt' />
+                  </ButtonC>
+                </EditProduct>
               </section>
             </Product>
           </li>
         </ListProducts>
-      </section>
-      <Line />
-      <Total>
-        <p>Total a pagar:</p>
-        <span>$29.13</span>
-      </Total>
-      <Button>Continuar</Button>
+        <Line />
+        <Total>
+          <p>Total a pagar:</p>
+          <span>$29.13</span>
+        </Total>
+        <BtnC>
+          <Button>Continuar</Button>
+        </BtnC>
+      </Content>
     </MainC>
   )
 }
 
 export default ShoppingCart
 
+const Content = styled.div`
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  @media screen and (min-width: 480px) {
+    width: 90%;
+  }
+  @media screen and (min-width: 768px) {
+    width: 85%;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 75%;
+  }
+`
+
 const NumberP = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: fit-content;
   border-radius: 18px;
+  height: 28px;
+  gap: 0.5rem;
   background-color: ${(props) => props.theme.white};
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background-color: ${(props) => props.theme.pink_400};
-    i {
-      color: ${(props) => props.theme.white};
-      font-size: ${(props) => props.theme.font_18};
-    }
-    &:hover {
-      background-color: ${(props) => props.theme.pink_500};
-    }
-  }
-  span {
-    padding: 0 0.5rem;
-    font-size: ${(props) => props.theme.font_18};
-    font-weight: bold;
+  @media screen and (min-width: 768px) {
+    gap: 0.75rem;
+    height: 34px;
   }
 `
 const Product = styled.article`
@@ -132,8 +155,23 @@ const Product = styled.article`
       color: ${(props) => props.theme.gray_400};
     }
     span {
+      margin-left: auto;
       font-weight: bold;
       font-size: ${(props) => props.theme.font_16};
+    }
+  }
+  @media screen and (min-width: 768px) {
+    section {
+      gap: 0.75rem;
+      font-size: ${(props) => props.theme.font_14};
+    }
+  }
+  @media screen and (min-width: 1280px) {
+    section {
+      font-size: ${(props) => props.theme.font_16};
+      span {
+        font-size: ${(props) => props.theme.font_20};
+      }
     }
   }
 `
@@ -147,7 +185,26 @@ const Total = styled.div`
   display: flex;
   justify-content: space-between;
   font-weight: bold;
-  span {
-    font-size: ${(props) => props.theme.font_16};
+  font-size: ${(props) => props.theme.font_16};
+  @media screen and (min-width: 768px) {
+    font-size: ${(props) => props.theme.font_20};
+  }
+`
+const EditProduct = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+  @media screen and (min-width: 768px) {
+    gap: 2rem;
+  }
+`
+const BtnC = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  @media screen and (min-width: 768px) {
+    button {
+      width: auto;
+    }
   }
 `
