@@ -6,6 +6,8 @@ import Login from './components/Login'
 import NewProduct from './components/NewProduct'
 import ShoppingCart from './components/ShoppingCart'
 import ProductDescription from './components/ProductDescription'
+import FilterModal from './components/FilterModal'
+import PaymentTypeModal from './components/PaymentTypeModal'
 
 function App() {
   return (
@@ -13,7 +15,7 @@ function App() {
       <GlobalStyles theme={light} />
       <ThemeProvider theme={light}>
         <Menu />
-        <ProductDescription />
+        <ShoppingCart />
       </ThemeProvider>
     </>
   )
