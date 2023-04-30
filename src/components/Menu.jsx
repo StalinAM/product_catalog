@@ -15,11 +15,12 @@ function Menu() {
   ]
   return (
     <Container>
-      <h1>DS</h1>
       <Content>
+        <h1>DS</h1>
         <ul>
           {DATA.map((item) => (
             <Item key={item.id}>
+              <Text>{item.title}</Text>
               {item.id === 3 && <NumProduct>5</NumProduct>}
               <Icon className={`uil uil-${item.icon}`} />
             </Item>
@@ -48,25 +49,29 @@ const Container = styled.header`
     display: none;
   }
   @media screen and (min-width: 768px) {
-    padding: 3rem 4rem;
+    height: auto;
+    padding: 1.5rem 4rem;
     position: relative;
-    justify-content: space-between;
     h1 {
       font-size: 3rem;
       display: block;
     }
   }
+  @media screen and (min-width: 1080px) {
+    padding: 1.5rem 8rem;
+  }
 `
 const Content = styled.nav`
+  display: flex;
   width: 100%;
   ul {
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 1rem;
   }
   @media screen and (min-width: 768px) {
-    width: auto;
     ul {
       justify-content: flex-end;
       gap: 2rem;
@@ -90,12 +95,39 @@ const Item = styled.li`
   &:hover::before {
     width: 100%;
   }
+  @media screen and (min-width: 768px) {
+    &::before {
+      height: 4px;
+      bottom: -2px;
+    }
+    &:nth-child(1),
+    &:nth-child(2) {
+      i {
+        display: none;
+      }
+    }
+    &:nth-child(3),
+    &:nth-child(4) {
+      p {
+        display: none;
+      }
+    }
+  }
+`
+const Text = styled.p`
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: block;
+    font-size: ${(props) => props.theme.font_20};
+    font-weight: 500;
+    color: ${(props) => props.theme.black};
+  }
 `
 const Icon = styled.i`
   font-size: 1.75rem;
   color: ${(props) => props.theme.gray_500};
   @media screen and (min-width: 768px) {
-    color: ${(props) => props.theme.black}
+    color: ${(props) => props.theme.black};
   }
 `
 const NumProduct = styled.span`
