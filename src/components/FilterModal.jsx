@@ -57,16 +57,29 @@ const FormC = styled.form`
   button {
     margin-top: 1.5rem;
   }
+  @media screen and (min-width: 768px) {
+    padding: 2rem;
+    width: 400px;
+    h4 {
+      font-size: ${(props) => props.theme.font_20};
+    }
+  }
 `
 const RadioBtnsC = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  @media screen and (min-width: 768px) {
+    gap: 2rem;
+  }
 `
 const ButtonsC = styled.div`
   display: flex;
   gap: 1rem;
   button {
     margin-top: 0;
+  }
+  @media screen and (min-width: 768px) {
+    gap: 2rem;
   }
 `
