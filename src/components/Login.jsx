@@ -42,14 +42,23 @@ const Container = styled.main`
     color: ${(props) => props.theme.pink_400};
     font-weight: bold;
   }
+  @media screen and (min-width: 768px) {
+    height: calc(100vh - 120px);
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
 `
 const FormC = styled.form`
   width: 300px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   button {
     margin-top: 1.5rem;
+  }
+  @media screen and (min-width: 768px) {
+    width: 500px;
   }
 `
 const ContainerIcons = styled.div`
@@ -59,5 +68,11 @@ const ContainerIcons = styled.div`
   i {
     font-size: 2.375rem;
     color: ${(props) => props.theme.pink_400};
+  }
+  @media screen and (min-width: 768px) {
+    gap: 1rem;
+    i {
+      font-size: 3.125rem;
+    }
   }
 `
