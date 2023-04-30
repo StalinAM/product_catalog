@@ -6,12 +6,22 @@ export const MainC = styled.main`
   gap: 1rem;
   padding: 1rem 1rem 4rem 1rem;
   min-height: 100vh;
+  @media screen and (min-width: 768px) {
+    padding: 1.5rem 4rem;
+    min-height: calc(100vh - 120px);
+  }
+  @media screen and (min-width: 1080px) {
+    padding: 1.5rem 8rem;
+  }
 `
 export const InputsC = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
+  @media screen and (min-width: 768px) {
+    gap: 1rem;
+  }
 `
 export const Input = styled.input`
   background-color: ${(props) => props.theme.white};
@@ -25,12 +35,18 @@ export const Input = styled.input`
     color: ${(props) => props.theme.gray_400};
     font-weight: 400;
   }
+  @media screen and (min-width: 768px) {
+    font-size: ${(props) => props.theme.font_18};
+    padding: 0.75rem 1.5rem;
+  }
 `
 export const Label = styled.label`
   font-size: ${(props) => props.theme.font_14};
   font-weight: bold;
   color: ${(props) => props.theme.black};
-  margin-left: 0.9rem;
+  @media screen and (min-width: 768px) {
+    font-size: ${(props) => props.theme.font_18};
+  }
 `
 export const Button = styled.button`
   padding: 0.5rem 1rem;
@@ -41,6 +57,10 @@ export const Button = styled.button`
   font-weight: bold;
   &:hover {
     background-color: ${(props) => props.theme.pink_500};
+  }
+  @media screen and (min-width: 768px) {
+    padding: 0.75rem 1.5rem;
+    font-size: ${(props) => props.theme.font_20};
   }
 `
 export const RadioBtn = styled.label`
@@ -69,6 +89,12 @@ export const RadioBtn = styled.label`
       box-shadow: 0px 0px 0px 3px ${(props) => props.theme.pink_400} inset;
     }
   }
+  @media screen and (min-width: 768px) {
+    span {
+      font-size: ${(props) => props.theme.font_18};
+      padding: 0.75rem 1.5rem;
+    }
+  }
 `
 export const Backdrop = styled.div`
   position: fixed;
@@ -82,6 +108,11 @@ export const Backdrop = styled.div`
   width: 100%;
   height: calc(100vh-48px);
   backdrop-filter: brightness(0.7);
+  @media screen and (min-width: 768px) {
+    top: auto;
+    bottom: 0;
+    height: calc(100vh - 120px);
+  }
 `
 export const Back = styled.div`
   width: 2.5rem;
@@ -91,6 +122,7 @@ export const Back = styled.div`
   justify-content: center;
   background-color: ${(props) => props.theme.white};
   border-radius: 50%;
+  cursor: pointer;
   i {
     font-size: 2.375rem;
     &:hover {
@@ -104,13 +136,44 @@ export const Header = styled.section`
   align-items: center;
   justify-content: space-between;
   h1 {
-    font-size: ${(props) => props.theme.font_20};
+    font-size: ${(props) => props.theme.font_18};
     font-weight: bold;
+  }
+  @media screen and (min-width: 768px) {
+    h1 {
+      font-size: ${(props) => props.theme.font_20};
+    }
   }
 `
 export const Line = styled.span`
   width: 100%;
   height: 2px;
   border-radius: 1px;
-  background-color: ${(props) => props.theme.black};
+  background-color: ${(props) => props.theme.pink_400};
+  @media screen and (min-width: 768px) {
+    height: 3px;
+  }
+`
+export const ButtonC = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.pink_400};
+  i {
+    color: ${(props) => props.theme.white};
+    font-size: ${(props) => props.theme.font_18};
+  }
+  &:hover {
+    background-color: ${(props) => props.theme.pink_500};
+  }
+  @media screen and (min-width: 768px) {
+    width: 34px;
+    height: 34px;
+    i {
+      font-size: ${(props) => props.theme.font_20};
+    }
+  }
 `
