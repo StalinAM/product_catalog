@@ -8,6 +8,11 @@ export const light = {
   white: '#FFFFFF',
   black: '#000000',
 
+  font_30: '1.875rem',
+  font_28: '1.75rem',
+  font_26: '1.625rem',
+  font_24: '1.5rem',
+  font_22: '1.375rem',
   font_20: '1.25rem',
   font_18: '1.125rem',
   font_16: '1rem',
