@@ -8,7 +8,7 @@ function Menu() {
       id: 2,
       link: '#about',
       title: 'Catálogo',
-      icon: 'uil uil-clipboard-notes'
+      icon: 'uil uil-diary'
     },
     { id: 3, link: '#skills', title: 'Carro', icon: 'uil uil-shopping-bag' },
     { id: 4, link: '#portfolio', title: 'Admin', icon: 'uil uil-user' }
