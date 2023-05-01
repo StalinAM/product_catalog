@@ -43,6 +43,9 @@ const GlobalStyles = createGlobalStyle`
         border: none;
         outline: none;
     }
+    picture{
+        display: block;
+    }
 /* Scrollbar */
     body::-webkit-scrollbar {
         width: 8px;
