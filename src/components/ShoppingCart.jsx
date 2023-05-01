@@ -18,7 +18,7 @@ function ShoppingCart() {
         <Back>
           <i className='uil uil-angle-left' />
         </Back>
-        <h1>Carro de compras</h1>
+        <h2>Carro de compras</h2>
       </Header>
       <Content>
         <ListProducts>
@@ -140,7 +140,6 @@ const Product = styled.article`
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    font-size: ${(props) => props.theme.font_12};
     color: ${(props) => props.theme.black};
     overflow-x: hidden;
     h3 {
@@ -149,26 +148,29 @@ const Product = styled.article`
       white-space: nowrap;
       text-overflow: ellipsis;
       word-wrap: normal;
+      font-size: ${(props) => props.theme.font_16};
     }
     p {
       font-weight: 400;
       color: ${(props) => props.theme.gray_400};
+      font-size: ${(props) => props.theme.font_14};
     }
     span {
       margin-left: auto;
       font-weight: bold;
-      font-size: ${(props) => props.theme.font_16};
+      font-size: ${(props) => props.theme.font_18};
     }
   }
   @media screen and (min-width: 768px) {
     section {
       gap: 0.75rem;
       font-size: ${(props) => props.theme.font_14};
-    }
-  }
-  @media screen and (min-width: 1280px) {
-    section {
-      font-size: ${(props) => props.theme.font_16};
+      h3 {
+        font-size: ${(props) => props.theme.font_18};
+      }
+      p {
+        font-size: ${(props) => props.theme.font_16};
+      }
       span {
         font-size: ${(props) => props.theme.font_20};
       }

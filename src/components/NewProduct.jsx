@@ -17,7 +17,7 @@ function NewProduct() {
         <Back>
           <i className='uil uil-angle-left' />
         </Back>
-        <h1>Datos nuevo producto</h1>
+        <h2>Datos nuevo producto</h2>
       </Header>
       <FormC>
         <section>

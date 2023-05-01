@@ -5,7 +5,7 @@ import { Button, Input, InputsC, Label } from '../styles/CommonStyles'
 function Login() {
   return (
     <Container>
-      <h1>ADMIN</h1>
+      <h2>ADMIN</h2>
       <FormC>
         <ContainerIcons>
           <i className='uil uil-envelope-alt' />
@@ -37,14 +37,14 @@ const Container = styled.main`
   align-items: center;
   width: 100%;
   height: calc(100vh - 48px);
-  h1 {
+  h2 {
     font-size: 2rem;
     color: ${(props) => props.theme.pink_400};
     font-weight: bold;
   }
   @media screen and (min-width: 768px) {
     height: calc(100vh - 120px);
-    h1 {
+    h2 {
       font-size: 2.5rem;
     }
   }
