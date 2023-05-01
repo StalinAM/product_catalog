@@ -7,6 +7,7 @@ export const MainC = styled.main`
   padding: 1rem 1rem 4rem 1rem;
   min-height: 100vh;
   @media screen and (min-width: 768px) {
+    gap: 1.5rem;
     padding: 1.5rem 4rem;
     min-height: calc(100vh - 120px);
   }
@@ -60,7 +61,7 @@ export const Button = styled.button`
   }
   @media screen and (min-width: 768px) {
     padding: 0.75rem 1.5rem;
-    font-size: ${(props) => props.theme.font_20};
+    font-size: ${(props) => props.theme.font_18};
   }
 `
 export const RadioBtn = styled.label`
@@ -114,7 +115,7 @@ export const Backdrop = styled.div`
     height: calc(100vh - 120px);
   }
 `
-export const Back = styled.div`
+export const Back = styled.button`
   width: 2.5rem;
   height: 2.5rem;
   display: flex;
@@ -135,12 +136,12 @@ export const Header = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  h1 {
+  h2 {
     font-size: ${(props) => props.theme.font_18};
     font-weight: bold;
   }
   @media screen and (min-width: 768px) {
-    h1 {
+    h2 {
       font-size: ${(props) => props.theme.font_20};
     }
   }
