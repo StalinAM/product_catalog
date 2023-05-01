@@ -8,6 +8,8 @@ import ShoppingCart from './components/ShoppingCart'
 import ProductDescription from './components/ProductDescription'
 import FilterModal from './components/FilterModal'
 import PaymentTypeModal from './components/PaymentTypeModal'
+import Products from './components/Products'
+import Home from './components/Home'
 
 function App() {
   return (
@@ -15,7 +17,7 @@ function App() {
       <GlobalStyles theme={light} />
       <ThemeProvider theme={light}>
         <Menu />
-        <ShoppingCart />
+        <Home />
       </ThemeProvider>
     </>
   )
