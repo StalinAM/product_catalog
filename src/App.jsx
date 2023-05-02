@@ -2,14 +2,13 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyles from './styles/GlobalStyles'
 import Menu from './components/Menu'
 import { light } from './styles/Theme'
-import Login from './components/Login'
-import NewProduct from './components/NewProduct'
-import ShoppingCart from './components/ShoppingCart'
-import ProductDescription from './components/ProductDescription'
-import FilterModal from './components/FilterModal'
-import PaymentTypeModal from './components/PaymentTypeModal'
-import Products from './components/Products'
-import Home from './components/Home'
+import { Route, Routes } from 'react-router-dom'
+import Home from './routes/Home'
+import Login from './routes/Login'
+import NewProduct from './routes/NewProduct'
+import ProductDescription from './routes/ProductDescription'
+import ShoppingCart from './routes/ShoppingCart'
+import Products from './routes/Products'
 
 function App() {
   return (
@@ -17,7 +16,13 @@ function App() {
       <GlobalStyles theme={light} />
       <ThemeProvider theme={light}>
         <Menu />
-        <Home />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='login' element={<Login />} />
+          <Route path='new-product' element={<NewProduct />} />
+          <Route path='shopping-cart' element={<ShoppingCart />} />
+          <Route path='catalog' element={<Products />} />
+        </Routes>
       </ThemeProvider>
     </>
   )
