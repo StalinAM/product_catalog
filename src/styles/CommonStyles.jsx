@@ -6,7 +6,15 @@ export const MainC = styled.main`
   gap: 1rem;
   padding: 1rem 1rem 4rem 1rem;
   min-height: 100vh;
+  h2 {
+    margin: 0.5rem 0;
+    font-size: ${(props) => props.theme.font_18};
+    font-weight: bold;
+  }
   @media screen and (min-width: 768px) {
+    h2 {
+      font-size: ${(props) => props.theme.font_20};
+    }
     gap: 1.5rem;
     padding: 1.5rem 4rem;
     min-height: calc(100vh - 120px);
@@ -131,21 +139,7 @@ export const Back = styled.button`
     }
   }
 `
-export const Header = styled.section`
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  h2 {
-    font-size: ${(props) => props.theme.font_18};
-    font-weight: bold;
-  }
-  @media screen and (min-width: 768px) {
-    h2 {
-      font-size: ${(props) => props.theme.font_20};
-    }
-  }
-`
+
 export const Line = styled.span`
   width: 100%;
   height: 2px;
