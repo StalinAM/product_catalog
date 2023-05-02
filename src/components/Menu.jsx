@@ -1,17 +1,23 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 function Menu() {
   const DATA = [
-    { id: 1, link: '#', title: 'Inicio', icon: 'uil uil-estate' },
+    { id: 1, link: '/', title: 'Inicio', icon: 'uil uil-estate' },
     {
       id: 2,
-      link: '#about',
+      link: '/catalog',
       title: 'Catálogo',
       icon: 'uil uil-diary'
     },
-    { id: 3, link: '#skills', title: 'Carro', icon: 'uil uil-shopping-bag' },
-    { id: 4, link: '#portfolio', title: 'Admin', icon: 'uil uil-user' }
+    {
+      id: 3,
+      link: '/shopping-cart',
+      title: 'Carro',
+      icon: 'uil uil-shopping-bag'
+    },
+    { id: 4, link: '/login', title: 'Admin', icon: 'uil uil-user' }
   ]
   return (
     <Container>
@@ -20,9 +26,11 @@ function Menu() {
         <ul>
           {DATA.map((item) => (
             <Item key={item.id}>
-              <Text>{item.title}</Text>
-              {item.id === 3 && <NumProduct>5</NumProduct>}
-              <Icon className={`uil uil-${item.icon}`} />
+              <Link to={item.link}>
+                <Text>{item.title}</Text>
+                {item.id === 3 && <NumProduct>5</NumProduct>}
+                <Icon className={`uil uil-${item.icon}`} />
+              </Link>
             </Item>
           ))}
         </ul>
