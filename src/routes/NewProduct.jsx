@@ -1,24 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import {
-  Back,
-  Button,
-  Header,
-  Input,
-  InputsC,
-  Label,
-  MainC
-} from '../styles/CommonStyles'
+import { Button, Input, InputsC, Label, MainC } from '../styles/CommonStyles'
 
 function NewProduct() {
   return (
     <MainC>
-      <Header>
-        <Back>
-          <i className='uil uil-angle-left' />
-        </Back>
-        <h2>Datos nuevo producto</h2>
-      </Header>
+      <h2>Datos nuevo producto</h2>
       <FormC>
         <section>
           <InputsC>

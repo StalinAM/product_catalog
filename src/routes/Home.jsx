@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Button } from '../styles/CommonStyles'
 import homeImg from '../assets/home.svg'
+import { Link } from 'react-router-dom'
 
 function Home() {
   return (
@@ -14,7 +14,7 @@ function Home() {
             ¡Bienvenidos a nuestra tienda en línea! Encuentra todo para tu hogar
             y cuidado personal: cocina, baño, maquillaje y más!
           </p>
-          <Button>Catálogo</Button>
+          <Button to='/catalog'>Catálogo</Button>
         </div>
       </Content>
     </Container>
@@ -50,9 +50,6 @@ const Content = styled.section`
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    button {
-      width: fit-content;
-    }
   }
   @media screen and (min-width: 768px) {
     flex-direction: row-reverse;
@@ -64,5 +61,20 @@ const Content = styled.section`
         max-width: 45ch;
       }
     }
+  }
+`
+const Button = styled(Link)`
+  padding: 0.5rem 1rem;
+  border-radius: 18px;
+  width: fit-content;
+  background-color: ${(props) => props.theme.pink_400};
+  color: ${(props) => props.theme.white};
+  font-weight: bold;
+  &:hover {
+    background-color: ${(props) => props.theme.pink_500};
+  }
+  @media screen and (min-width: 768px) {
+    padding: 0.75rem 1.5rem;
+    font-size: ${(props) => props.theme.font_18};
   }
 `

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Back, Button, ButtonC, Header, MainC } from '../styles/CommonStyles'
+import { Button, ButtonC, MainC } from '../styles/CommonStyles'
 import img1 from '../assets/1.webp'
 import img2 from '../assets/2.webp'
 import img3 from '../assets/3.webp'
@@ -9,12 +9,7 @@ import img4 from '../assets/4.webp'
 function ProductDescription() {
   return (
     <MainC>
-      <Header>
-        <Back>
-          <i className='uil uil-angle-left' />
-        </Back>
-        <h2>Información del producto</h2>
-      </Header>
+      <h2>Información del producto</h2>
       <Content>
         <article>
           <SlideC>

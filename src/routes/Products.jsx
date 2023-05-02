@@ -1,17 +1,12 @@
 import React from 'react'
-import { Back, Header, MainC, Input } from '../styles/CommonStyles'
+import { MainC, Input } from '../styles/CommonStyles'
 import styled from 'styled-components'
-import Item from './Item'
+import Item from '../components/Item'
 
 function Products() {
   return (
     <MainC>
-      <Header>
-        <Back>
-          <i className='uil uil-angle-left' />
-        </Back>
-        <h2>Catálogo de productos</h2>
-      </Header>
+      <h2>Catálogo de productos</h2>
       <Content>
         <FilterC>
           <InputC>

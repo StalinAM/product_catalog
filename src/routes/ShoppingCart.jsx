@@ -1,25 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import {
-  Back,
-  Button,
-  ButtonC,
-  Header,
-  Line,
-  MainC
-} from '../styles/CommonStyles'
+import { Button, ButtonC, Line, MainC } from '../styles/CommonStyles'
 import product from '../assets/product.jpg'
 import product2 from '../assets/product2.webp'
+import PaymentTypeModal from '../components/PaymentTypeModal'
 
 function ShoppingCart() {
+  const [active, setActive] = useState(false)
   return (
     <MainC>
-      <Header>
-        <Back>
-          <i className='uil uil-angle-left' />
-        </Back>
-        <h2>Carro de compras</h2>
-      </Header>
+      <h2>Carro de compras</h2>
       <Content>
         <ListProducts>
           <li>
@@ -87,7 +77,8 @@ function ShoppingCart() {
           <span>$29.13</span>
         </Total>
         <BtnC>
-          <Button>Continuar</Button>
+          {active && <PaymentTypeModal setActive={setActive} />}
+          <Button onClick={() => setActive(true)}>Continuar</Button>
         </BtnC>
       </Content>
     </MainC>
