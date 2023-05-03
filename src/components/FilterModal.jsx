@@ -8,7 +8,7 @@ import {
   RadioBtn
 } from '../styles/CommonStyles'
 
-function FilterModal() {
+function FilterModal({ setActive }) {
   return (
     <Backdrop>
       <FormC>
@@ -28,7 +28,7 @@ function FilterModal() {
         </InputsC>
         <ButtonsC>
           <Button>Aplicar</Button>
-          <Button>Cancelar</Button>
+          <Button onClick={() => setActive(false)}>Cancelar</Button>
         </ButtonsC>
       </FormC>
     </Backdrop>

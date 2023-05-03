@@ -9,7 +9,7 @@ import {
   Backdrop
 } from '../styles/CommonStyles'
 
-function PaymentTypeModal() {
+function PaymentTypeModal({ setActive }) {
   return (
     <Backdrop>
       <Modal>
@@ -41,7 +41,7 @@ function PaymentTypeModal() {
           </Information>
           <ButtonsC>
             <Button>Enviar</Button>
-            <Button>Cancelar</Button>
+            <Button onClick={() => setActive(false)}>Cancelar</Button>
           </ButtonsC>
         </FormC>
       </Modal>
@@ -110,7 +110,9 @@ const Information = styled.div`
 const ButtonsC = styled.div`
   display: flex;
   gap: 1rem;
+  justify-content: space-around;
   button {
+    width: 100% !important;
     margin-top: 0;
   }
   @media screen and (min-width: 768px) {
