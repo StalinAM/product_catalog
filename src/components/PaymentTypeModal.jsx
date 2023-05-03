@@ -8,6 +8,7 @@ import {
   RadioBtn,
   Backdrop
 } from '../styles/CommonStyles'
+import { UilInfoCircle } from '@iconscout/react-unicons'
 
 function PaymentTypeModal({ setActive }) {
   return (
@@ -33,7 +34,9 @@ function PaymentTypeModal({ setActive }) {
             </RadioBtnsC>
           </InputsC>
           <Information>
-            <i className='uil uil-info-circle' />
+            <div>
+              <UilInfoCircle size='30' />
+            </div>
             <span>
               Al hacer clic en el botón enviar, será redirigido automáticamente
               a WhatsApp con todos los detalles de su compra.
@@ -93,15 +96,18 @@ const Information = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  i {
-    font-size: 2rem;
-    color: ${(props) => props.theme.pink_500};
+  svg {
+    fill: ${(props) => props.theme.pink_500};
   }
   span {
     color: ${(props) => props.theme.gray_400};
     font-size: ${(props) => props.theme.font_12};
   }
   @media screen and (min-width: 768px) {
+    svg {
+      width: 38px;
+      height: 38px;
+    }
     span {
       font-size: ${(props) => props.theme.font_14};
     }
