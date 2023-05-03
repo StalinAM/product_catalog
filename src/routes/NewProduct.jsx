@@ -1,12 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { Button, Input, InputsC, Label, MainC } from '../styles/CommonStyles'
+import { uploadImages } from '../firebase/services'
+import {
+  Back,
+  Button,
+  Input,
+  InputsC,
+  Label,
+  MainC
+} from '../styles/CommonStyles'
 
 function NewProduct() {
+  const navigate = useNavigate()
+  const [imagesUrl, setImagesUrl] = useState(null)
+  const [files, setFiles] = useState(null)
+
+  const handleInputChange = async (e) => {
+    setFiles(e.target.files)
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const urls = []
+    for (const item of files) {
+      const url = await uploadImages(item)
+      urls.push(url)
+    }
+    setImagesUrl(urls)
+  }
   return (
     <MainC>
-      <h2>Datos nuevo producto</h2>
-      <FormC>
+      <Header>
+        <Back onClick={() => navigate('/catalog')}>
+          <i className='uil uil-angle-left' />
+        </Back>
+        <h2>Datos del producto</h2>
+      </Header>
+      <FormC onSubmit={handleSubmit}>
         <section>
           <InputsC>
             <Label htmlFor='email'>Título</Label>
@@ -22,11 +53,11 @@ function NewProduct() {
           </InputsC>
           <InputsNumC>
             <InputsC>
-              <Label htmlFor='text'>Precio</Label>
+              <Label htmlFor='text'>Precio con descuento</Label>
               <Input type='number' placeholder='0' />
             </InputsC>
             <InputsC>
-              <Label htmlFor='text'>Precio</Label>
+              <Label htmlFor='text'>Precio normal</Label>
               <Input type='number' placeholder='0' />
             </InputsC>
           </InputsNumC>
@@ -38,10 +69,16 @@ function NewProduct() {
           </InputsC>
           <InputsC>
             <Label>Agregar imagenes</Label>
+            <Input
+              type='file'
+              onChange={handleInputChange}
+              multiple
+              placeholder='0'
+            />
           </InputsC>
         </section>
         <div>
-          <Button>Subir Producto</Button>
+          <Button type='submit'>Subir Producto</Button>
         </div>
       </FormC>
     </MainC>
@@ -49,6 +86,11 @@ function NewProduct() {
 }
 
 export default NewProduct
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 
 const FormC = styled.form`
   width: 100%;
