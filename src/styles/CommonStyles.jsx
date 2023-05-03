@@ -44,9 +44,23 @@ export const Input = styled.input`
     color: ${(props) => props.theme.gray_400};
     font-weight: 400;
   }
+  &::file-selector-button {
+    cursor: pointer;
+    border: none;
+    border-radius: 16px;
+    padding: 0.5rem 1rem;
+    font-size: ${(props) => props.theme.font_16};
+    font-weight: 500;
+    color: ${(props) => props.theme.white};
+    background-color: ${(props) => props.theme.pink_400};
+  }
   @media screen and (min-width: 768px) {
     font-size: ${(props) => props.theme.font_18};
     padding: 0.75rem 1.5rem;
+    &::file-selector-button {
+      padding: 0.75rem 1rem;
+      font-size: ${(props) => props.theme.font_18};
+    }
   }
 `
 export const Label = styled.label`
@@ -134,9 +148,9 @@ export const Back = styled.button`
   cursor: pointer;
   i {
     font-size: 2.375rem;
-    &:hover {
-      color: ${(props) => props.theme.pink_500};
-    }
+  }
+  &:hover i {
+    color: ${(props) => props.theme.pink_500};
   }
 `
 
