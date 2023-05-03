@@ -17,6 +17,9 @@ const GlobalStyles = createGlobalStyle`
     input, textarea{
         font: inherit;
     }
+    input::file-selector-button{
+        font-family: 'Nunito', sans-serif;
+    }
     input:focus, textarea:focus{
         outline: none;
     }
