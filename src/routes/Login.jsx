@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { AuthContext } from '../context/Auth'
 import { loginUser, logoutUser } from '../firebase/services'
 import { Button, Input, InputsC, Label } from '../styles/CommonStyles'
+import { UilPadlock, UilEnvelopeAlt } from '@iconscout/react-unicons'
 
 function Login() {
   const navigate = useNavigate()
@@ -26,7 +27,7 @@ function Login() {
       {!currentUser && (
         <FormC onSubmit={login}>
           <ContainerIcons>
-            <i className='uil uil-envelope-alt' />
+            <UilEnvelopeAlt size='38' />
             <InputsC>
               <Label htmlFor='email'>Correo electrónico</Label>
               <Input
@@ -39,7 +40,7 @@ function Login() {
             </InputsC>
           </ContainerIcons>
           <ContainerIcons>
-            <i className='uil uil-padlock' />
+            <UilPadlock size='38' />
             <InputsC>
               <Label htmlFor='password'>Contraseña</Label>
               <Input
@@ -97,14 +98,14 @@ const ContainerIcons = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  i {
-    font-size: 2.375rem;
-    color: ${(props) => props.theme.pink_400};
+  svg {
+    fill: ${(props) => props.theme.pink_400};
   }
   @media screen and (min-width: 768px) {
     gap: 1rem;
-    i {
-      font-size: 3.125rem;
+    svg {
+      width: 50px;
+      height: 50px;
     }
   }
 `
