@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import img1 from '../assets/1.webp'
 import img2 from '../assets/product.jpg'
+import { AuthContext } from '../context/Auth'
 
 function Item() {
+  const navigate = useNavigate()
+  const { currentUser } = useContext(AuthContext)
   return (
     <Container>
       <picture>
@@ -13,9 +17,11 @@ function Item() {
         <h4>Camiseta calabera</h4>
         <p>Camiseta de algodon negra con estampado de craneo </p>
         <PriceC>
-          <button>
-            <i className='uil uil-pen' />
-          </button>
+          {currentUser && (
+            <button onClick={() => navigate('/new-product')}>
+              <i className='uil uil-pen' />
+            </button>
+          )}
           <span>
             $30.99<span>$19.99</span>
           </span>

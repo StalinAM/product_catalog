@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { MainC, Input } from '../styles/CommonStyles'
 import styled from 'styled-components'
 import Item from '../components/Item'
+import { AuthContext } from '../context/Auth'
+import FilterModal from '../components/FilterModal'
+import { useNavigate } from 'react-router-dom'
 
 function Products() {
+  const navigate = useNavigate()
+  const { currentUser } = useContext(AuthContext)
+  const [active, setActive] = useState(false)
   return (
     <MainC>
       <h2>Catálogo de productos</h2>
@@ -13,9 +19,15 @@ function Products() {
             <i className='uil uil-search' />
             <Input placeholder='Buscar por nombre' />
           </InputC>
-          <FilterBtn>
-            <i className='uil uil-filter' />
-          </FilterBtn>
+          {currentUser ? (
+            <FilterBtn onClick={() => navigate('/new-product')}>
+              <i className='uil uil-file-plus' />
+            </FilterBtn>
+          ) : (
+            <FilterBtn onClick={() => setActive(true)}>
+              <i className='uil uil-filter' />
+            </FilterBtn>
+          )}
         </FilterC>
         <section>
           <Title>
@@ -64,6 +76,7 @@ function Products() {
           </ListProducts>
         </section>
       </Content>
+      {active && <FilterModal setActive={setActive} />}
     </MainC>
   )
 }
@@ -108,11 +121,11 @@ const FilterBtn = styled.button`
   background-color: ${(props) => props.theme.white};
   border-radius: 50%;
   cursor: pointer;
+  &:hover i {
+    color: ${(props) => props.theme.pink_500};
+  }
   i {
     font-size: 1.5rem;
-    &:hover {
-      color: ${(props) => props.theme.pink_500};
-    }
   }
   @media screen and (min-width: 768px) {
     width: 2.75rem;
