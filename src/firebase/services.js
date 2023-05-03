@@ -1,7 +1,15 @@
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth, storage } from './firebase'
+import { auth, db, storage } from './firebase'
 import { v4 } from 'uuid'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  getDocs,
+  query
+} from 'firebase/firestore'
+
 // LOGIN
 export const loginUser = async (email, password, navigate) => {
   try {
@@ -19,10 +27,19 @@ export const logoutUser = async () => {
     console.log(error)
   }
 }
-// UPLOAD FILE
+// UPLOAD IMAGES
 export const uploadImages = async (file) => {
   const storageRef = ref(storage, v4())
   await uploadBytes(storageRef, file)
   const url = await getDownloadURL(storageRef)
   return url
+}
+// INSERT PRODUCT
+export const insertProduct = async (product) => {
+  try {
+    const productRef = collection(db, 'products')
+    await addDoc(productRef, product)
+  } catch (error) {
+    console.log(error)
+  }
 }
