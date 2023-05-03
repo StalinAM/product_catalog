@@ -24,6 +24,7 @@ export const MainC = styled.main`
   }
 `
 export const InputsC = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -53,6 +54,9 @@ export const Input = styled.input`
     font-weight: 500;
     color: ${(props) => props.theme.white};
     background-color: ${(props) => props.theme.pink_400};
+  }
+  &::file-selector-button:hover {
+    background-color: ${(props) => props.theme.pink_500};
   }
   @media screen and (min-width: 768px) {
     font-size: ${(props) => props.theme.font_18};
@@ -146,11 +150,14 @@ export const Back = styled.button`
   background-color: ${(props) => props.theme.white};
   border-radius: 50%;
   cursor: pointer;
-  i {
-    font-size: 2.375rem;
+  svg {
+    fill: ${(props) => props.theme.black};
   }
-  &:hover i {
-    color: ${(props) => props.theme.pink_500};
+  &:hover {
+    background-color: ${(props) => props.theme.pink_400};
+  }
+  &:hover svg {
+    fill: ${(props) => props.theme.white};
   }
 `
 
@@ -170,19 +177,22 @@ export const ButtonC = styled.button`
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: ${(props) => props.theme.pink_400};
-  i {
-    color: ${(props) => props.theme.white};
-    font-size: ${(props) => props.theme.font_18};
+  background-color: ${(props) => props.theme.white};
+  svg {
+    fill: ${(props) => props.theme.pink_400};
   }
   &:hover {
-    background-color: ${(props) => props.theme.pink_500};
+    background-color: ${(props) => props.theme.pink_400};
+  }
+  &:hover svg {
+    fill: ${(props) => props.theme.white};
   }
   @media screen and (min-width: 768px) {
     width: 34px;
     height: 34px;
-    i {
-      font-size: ${(props) => props.theme.font_20};
+    svg {
+      width: 24px;
+      height: 24px;
     }
   }
 `
