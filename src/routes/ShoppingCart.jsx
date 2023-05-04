@@ -4,6 +4,7 @@ import { Button, ButtonC, Line, MainC } from '../styles/CommonStyles'
 import product from '../assets/product.jpg'
 import product2 from '../assets/product2.webp'
 import PaymentTypeModal from '../components/PaymentTypeModal'
+import { UilPlus, UilMinus, UilTrashAlt } from '@iconscout/react-unicons'
 
 function ShoppingCart() {
   const [active, setActive] = useState(false)
@@ -27,15 +28,15 @@ function ShoppingCart() {
                 <EditProduct>
                   <NumberP>
                     <ButtonC>
-                      <i className='uil uil-minus' />
+                      <UilMinus size='20' />
                     </ButtonC>
                     <span>1</span>
                     <ButtonC>
-                      <i className='uil uil-plus' />
+                      <UilPlus size='20' />
                     </ButtonC>
                   </NumberP>
                   <ButtonC>
-                    <i className='uil uil-trash-alt' />
+                    <UilTrashAlt size='22' />
                   </ButtonC>
                 </EditProduct>
               </section>
@@ -56,15 +57,15 @@ function ShoppingCart() {
                 <EditProduct>
                   <NumberP>
                     <ButtonC>
-                      <i className='uil uil-minus' />
+                      <UilMinus size='20' />
                     </ButtonC>
                     <span>1</span>
                     <ButtonC>
-                      <i className='uil uil-plus' />
+                      <UilPlus size='20' />
                     </ButtonC>
                   </NumberP>
                   <ButtonC>
-                    <i className='uil uil-trash-alt' />
+                    <UilTrashAlt size='22' />
                   </ButtonC>
                 </EditProduct>
               </section>
@@ -111,10 +112,9 @@ const NumberP = styled.div`
   width: fit-content;
   border-radius: 18px;
   height: 28px;
-  gap: 0.5rem;
-  background-color: ${(props) => props.theme.white};
+  gap: 0.75rem;
   @media screen and (min-width: 768px) {
-    gap: 0.75rem;
+    gap: 1rem;
     height: 34px;
   }
 `
