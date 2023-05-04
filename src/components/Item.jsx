@@ -1,29 +1,34 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import img1 from '../assets/1.webp'
-import img2 from '../assets/product.jpg'
 import { AuthContext } from '../context/Auth'
+import { UilPen, UilTrashAlt } from '@iconscout/react-unicons'
 
-function Item() {
+function Item({ title, description, discountedPrice, normalPrice, image }) {
   const navigate = useNavigate()
   const { currentUser } = useContext(AuthContext)
   return (
     <Container>
       <picture>
-        <img src={img1} alt='' />
+        <img src={image} alt='' />
       </picture>
       <Content>
-        <h4>Camiseta calabera</h4>
-        <p>Camiseta de algodon negra con estampado de craneo </p>
+        <h4>{title}</h4>
+        <p>{description}</p>
         <PriceC>
           {currentUser && (
-            <button onClick={() => navigate('/new-product')}>
-              <i className='uil uil-pen' />
-            </button>
+            <ButtonsC>
+              <button onClick={() => navigate('/new-product')}>
+                <UilPen size='24' />
+              </button>
+              <button onClick={() => navigate('/new-product')}>
+                <UilTrashAlt size='24' />
+              </button>
+            </ButtonsC>
           )}
           <span>
-            $30.99<span>$19.99</span>
+            ${discountedPrice}
+            <span>${normalPrice}</span>
           </span>
         </PriceC>
       </Content>
@@ -91,22 +96,6 @@ const Content = styled.section`
 const PriceC = styled.div`
   width: 100%;
   display: flex;
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
-    background-color: ${(props) => props.theme.gray_300};
-    i {
-      font-size: 1.7rem;
-      color: ${(props) => props.theme.pink_400};
-      &:hover {
-        color: ${(props) => props.theme.pink_500};
-      }
-    }
-  }
   span {
     display: flex;
     gap: 0.5rem;
@@ -129,6 +118,29 @@ const PriceC = styled.div`
     }
     span > span {
       font-size: ${(props) => props.theme.font_16};
+    }
+  }
+`
+const ButtonsC = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: ${(props) => props.theme.gray_300};
+    svg {
+      fill: ${(props) => props.theme.pink_400};
+    }
+    &:hover {
+      background-color: ${(props) => props.theme.pink_400};
+    }
+    &:hover svg {
+      fill: ${(props) => props.theme.white};
     }
   }
 `
