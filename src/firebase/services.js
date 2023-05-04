@@ -43,3 +43,15 @@ export const insertProduct = async (product) => {
     console.log(error)
   }
 }
+// FETCH PRODUCTS
+export const fetchProducts = async () => {
+  const products = []
+  const querySnapshot = await getDocs(collection(db, 'products'))
+  querySnapshot.forEach((doc) => {
+    const product = { ...doc.data() }
+    product.doId = doc.id
+
+    products.push(product)
+  })
+  return products
+}
