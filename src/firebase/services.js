@@ -55,3 +55,7 @@ export const fetchProducts = async () => {
   })
   return products
 }
+// DELETE PRODUCT
+export const deleteProduct = async (docId) => {
+  await deleteDoc(doc(db, 'products', docId))
+}
