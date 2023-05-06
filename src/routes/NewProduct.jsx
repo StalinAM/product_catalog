@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { uploadImages } from '../firebase/services'
+import { UilCheck, UilAngleLeft } from '@iconscout/react-unicons'
+import { insertProduct, uploadImages } from '../firebase/services'
 import {
   Back,
   Button,
@@ -11,70 +12,146 @@ import {
   MainC
 } from '../styles/CommonStyles'
 
-function NewProduct() {
+function NewProduct({ product, setProduct }) {
+  const inputRef = useRef()
   const navigate = useNavigate()
-  const [imagesUrl, setImagesUrl] = useState(null)
-  const [files, setFiles] = useState(null)
+  const [imagesUrls, setImagesUrls] = useState(null)
 
-  const handleInputChange = async (e) => {
-    setFiles(e.target.files)
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleImagesInputChange = async (e) => {
     const urls = []
+    const files = e.target.files
     for (const item of files) {
       const url = await uploadImages(item)
       urls.push(url)
     }
-    setImagesUrl(urls)
+    setImagesUrls(urls)
+    product.images_urls = urls
+  }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setProduct((prevState) => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+  const addProduct = async () => {
+    if (
+      product.title &&
+      product.description &&
+      product.category &&
+      product.discounted_price &&
+      product.normal_price &&
+      product.product_details &&
+      product.images_urls
+    ) {
+      await insertProduct({ ...product })
+    }
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    addProduct()
+    setProduct({
+      title: '',
+      description: '',
+      category: '',
+      discounted_price: 0,
+      normal_price: 0,
+      product_details: '',
+      images_urls: ''
+    })
+    setImagesUrls(null)
+    inputRef.current.value = ''
   }
   return (
     <MainC>
       <Header>
         <Back onClick={() => navigate('/catalog')}>
-          <i className='uil uil-angle-left' />
+          <UilAngleLeft size='38' />
         </Back>
         <h2>Datos del producto</h2>
       </Header>
       <FormC onSubmit={handleSubmit}>
         <section>
           <InputsC>
-            <Label htmlFor='email'>Título</Label>
-            <Input type='text' placeholder='Ingrese el título del producto' />
+            <Label htmlFor='title'>Título</Label>
+            <Input
+              required
+              type='text'
+              name='title'
+              value={product.title}
+              onChange={handleInputChange}
+              placeholder='Ingrese el título del producto'
+            />
           </InputsC>
           <InputsC>
-            <Label htmlFor='text'>Descripción</Label>
-            <Input type='text' placeholder='Ingrese una descripción corta' />
+            <Label htmlFor='description'>Descripción</Label>
+            <Input
+              required
+              type='text'
+              name='description'
+              value={product.description}
+              onChange={handleInputChange}
+              placeholder='Ingrese una descripción corta'
+            />
           </InputsC>
           <InputsC>
-            <Label htmlFor='text'>Categoría</Label>
-            <Input type='text' placeholder='hogar, ropa, maquillaje, etc' />
+            <Label htmlFor='category'>Categoría</Label>
+            <Input
+              required
+              type='text'
+              name='category'
+              value={product.category}
+              onChange={handleInputChange}
+              placeholder='hogar, ropa, maquillaje, etc'
+            />
           </InputsC>
           <InputsNumC>
             <InputsC>
-              <Label htmlFor='text'>Precio con descuento</Label>
-              <Input type='number' placeholder='0' />
+              <Label htmlFor='discounted_price'>Precio con descuento</Label>
+              <Input
+                required
+                type='number'
+                name='discounted_price'
+                value={product.discounted_price}
+                onChange={handleInputChange}
+                placeholder='0'
+              />
             </InputsC>
             <InputsC>
-              <Label htmlFor='text'>Precio normal</Label>
-              <Input type='number' placeholder='0' />
+              <Label htmlFor='normal_price'>Precio normal</Label>
+              <Input
+                required
+                type='number'
+                name='normal_price'
+                value={product.normal_price}
+                onChange={handleInputChange}
+                placeholder='0'
+              />
             </InputsC>
           </InputsNumC>
         </section>
         <section>
           <InputsC>
-            <Label>Detalles del producto</Label>
-            <Textarea placeholder='Ingrese todos los detalles de producto' />
+            <Label htmlFor='product_details'>Detalles del producto</Label>
+            <Textarea
+              required
+              name='product_details'
+              value={product.product_details}
+              onChange={handleInputChange}
+              placeholder='Ingrese todos los detalles de producto'
+            />
           </InputsC>
           <InputsC>
-            <Label>Agregar imagenes</Label>
+            <Label htmlFor='add_images'>Agregar imagenes</Label>
             <Input
               type='file'
-              onChange={handleInputChange}
+              name='add_images'
+              accept='image'
+              ref={inputRef}
+              onChange={handleImagesInputChange}
               multiple
-              placeholder='0'
             />
+            {imagesUrls && <Check size='48' />}
           </InputsC>
         </section>
         <div>
@@ -151,5 +228,14 @@ const Textarea = styled.textarea`
   @media screen and (min-width: 768px) {
     padding: 0.75rem 1.5rem;
     font-size: ${(props) => props.theme.font_18};
+  }
+`
+const Check = styled(UilCheck)`
+  margin-left: auto;
+  fill: ${(props) => props.theme.pink_400};
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 1rem;
   }
 `
