@@ -1,12 +1,18 @@
 import React, { useContext, useState } from 'react'
 import { MainC, Input } from '../styles/CommonStyles'
 import styled from 'styled-components'
-import Item from '../components/Item'
 import { AuthContext } from '../context/Auth'
-import FilterModal from '../components/FilterModal'
 import { useNavigate } from 'react-router-dom'
+import FilterModal from '../components/FilterModal'
+import {
+  UilFilePlus,
+  UilFilter,
+  UilRocket,
+  UilBookOpen
+} from '@iconscout/react-unicons'
+import ListProducts from '../components/ListProducts'
 
-function Products() {
+function Products({ product, setProduct }) {
   const navigate = useNavigate()
   const { currentUser } = useContext(AuthContext)
   const [active, setActive] = useState(false)
@@ -21,59 +27,27 @@ function Products() {
           </InputC>
           {currentUser ? (
             <FilterBtn onClick={() => navigate('/new-product')}>
-              <i className='uil uil-file-plus' />
+              <UilFilePlus size='28' />
             </FilterBtn>
           ) : (
             <FilterBtn onClick={() => setActive(true)}>
-              <i className='uil uil-filter' />
+              <UilFilter size='24' />
             </FilterBtn>
           )}
         </FilterC>
         <section>
           <Title>
-            <i className='uil uil-rocket' />
+            <UilRocket size='28' />
             Mas Recientes
           </Title>
-          <ListProducts>
-            <li>
-              <Item />
-            </li>
-            <li>
-              <Item />
-            </li>
-            <li>
-              <Item />
-            </li>
-          </ListProducts>
+          <ListProducts />
         </section>
         <section>
           <Title>
-            <i className='uil uil-book-open' />
+            <UilBookOpen size='28' />
             Todos los productos
           </Title>
-          <ListProducts>
-            <li>
-              <Item />
-            </li>
-            <li>
-              <Item />
-            </li>
-            <li>
-              <Item />
-            </li>
-            <li>
-              <Item />
-            </li>
-            <li>
-              <Item />
-            </li>
-            <li>
-              <Item />
-            </li>
-            <li>
-              <Item />
-            </li>
-          </ListProducts>
+          <ListProducts />
         </section>
       </Content>
       {active && <FilterModal setActive={setActive} />}
@@ -121,17 +95,21 @@ const FilterBtn = styled.button`
   background-color: ${(props) => props.theme.white};
   border-radius: 50%;
   cursor: pointer;
-  &:hover i {
-    color: ${(props) => props.theme.pink_500};
+  svg {
+    fill: ${(props) => props.theme.pink_400};
   }
-  i {
-    font-size: 1.5rem;
+  &:hover {
+    background-color: ${(props) => props.theme.pink_400};
+  }
+  &:hover svg {
+    fill: ${(props) => props.theme.white};
   }
   @media screen and (min-width: 768px) {
     width: 2.75rem;
     height: 2.75rem;
-    i {
-      font-size: 1.6rem;
+    svg {
+      width: 30px;
+      height: 30px;
     }
   }
 `
@@ -165,30 +143,21 @@ const InputC = styled.div`
     }
   }
 `
-const ListProducts = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 400px));
-  justify-content: center;
-  gap: 1.5rem;
-  @media screen and (min-width: 768px) {
-    gap: 2rem;
-  }
-`
 const Title = styled.h3`
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: ${(props) => props.theme.font_18};
   color: ${(props) => props.theme.black};
-  i {
-    font-size: 1.7rem;
-    color: ${(props) => props.theme.pink_400};
+  svg {
+    fill: ${(props) => props.theme.pink_400};
   }
   @media screen and (min-width: 768px) {
     gap: 0.75rem;
     font-size: ${(props) => props.theme.font_20};
-    i {
-      font-size: 1.9rem;
+    svg {
+      width: 30px;
+      height: 30px;
     }
   }
 `
