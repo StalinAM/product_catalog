@@ -40,26 +40,24 @@ export default Item
 
 const Container = styled.article`
   position: relative;
-  height: 370px;
+  height: 450px;
   display: flex;
   justify-content: center;
   padding: 0 0.5rem;
   picture {
     width: 70%;
     position: absolute;
-    top: 0;
+    bottom: 170px;
     left: 50%;
     transform: translate(-50%, 0);
     border-radius: 18px;
     overflow: hidden;
     border: 4px solid ${(props) => props.theme.gray_300};
   }
-  @media screen and (min-width: 375px) {
-    height: 400px;
-    padding: 0;
-  }
   @media screen and (min-width: 768px) {
-    height: 440px;
+    picture {
+      bottom: 160px;
+    }
   }
 `
 const Content = styled.section`
@@ -71,6 +69,7 @@ const Content = styled.section`
   border-radius: 18px;
   background-color: ${(props) => props.theme.white};
   h4 {
+    text-transform: capitalize;
     font-weight: 500;
     overflow: hidden;
     white-space: nowrap;
@@ -79,6 +78,7 @@ const Content = styled.section`
     font-size: ${(props) => props.theme.font_16};
   }
   p {
+    text-transform: capitalize;
     font-weight: 400;
     color: ${(props) => props.theme.gray_400};
     font-size: ${(props) => props.theme.font_14};
