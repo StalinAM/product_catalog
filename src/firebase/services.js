@@ -2,13 +2,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, db, storage } from './firebase'
 import { v4 } from 'uuid'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  getDocs,
-  query
-} from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore'
 
 // LOGIN
 export const loginUser = async (email, password, navigate) => {
@@ -49,8 +43,7 @@ export const fetchProducts = async () => {
   const querySnapshot = await getDocs(collection(db, 'products'))
   querySnapshot.forEach((doc) => {
     const product = { ...doc.data() }
-    product.doId = doc.id
-
+    product.docId = doc.id
     products.push(product)
   })
   return products
@@ -58,4 +51,8 @@ export const fetchProducts = async () => {
 // DELETE PRODUCT
 export const deleteProduct = async (docId) => {
   await deleteDoc(doc(db, 'products', docId))
+}
+// EDIT PRODUCT
+export const editProduct = async (docId, product) => {
+  const res = await setDoc(doc(db, 'products', docId), product)
 }
