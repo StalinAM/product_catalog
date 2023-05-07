@@ -16,7 +16,7 @@ function FetchProducts({ children }) {
   }, [])
 
   return (
-    <FetchProductsContext.Provider value={{ listProducts }}>
+    <FetchProductsContext.Provider value={{ listProducts, getProducts }}>
       {children}
     </FetchProductsContext.Provider>
   )
