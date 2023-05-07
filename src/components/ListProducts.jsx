@@ -5,7 +5,6 @@ import Item from './Item'
 
 function ListProducts() {
   const { listProducts } = useContext(FetchProductsContext)
-  console.log(listProducts)
   return (
     <Container>
       {listProducts &&
@@ -16,8 +15,10 @@ function ListProducts() {
               description={item.description}
               discountedPrice={item.discounted_price}
               normalPrice={item.normal_price}
-              image={item.images_urls[0]}
+              image={item.images_urls}
               docId={item.docId}
+              productDetails={item.product_details}
+              category={item.category}
             />
           </li>
         ))}

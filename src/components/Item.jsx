@@ -1,16 +1,49 @@
 import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { AuthContext } from '../context/Auth'
 import { UilPen, UilTrashAlt } from '@iconscout/react-unicons'
+import { deleteProduct, editProduct } from '../firebase/services'
+import { FetchProductsContext } from '../context/FetchProducts'
+import { EditProductConext } from '../context/EditProduct'
+import { useNavigate } from 'react-router-dom'
 
-function Item({ title, description, discountedPrice, normalPrice, image }) {
-  const navigate = useNavigate()
+function Item({
+  title,
+  description,
+  discountedPrice,
+  normalPrice,
+  image,
+  productDetails,
+  category,
+  docId
+}) {
+  const { getProducts } = useContext(FetchProductsContext)
   const { currentUser } = useContext(AuthContext)
+  const { setSubmitActive, setProduct, product } = useContext(EditProductConext)
+  const navigate = useNavigate()
+
+  const updateProduct = async () => {
+    setProduct({
+      title,
+      description,
+      category,
+      discounted_price: discountedPrice,
+      normal_price: normalPrice,
+      product_details: productDetails,
+      images_urls: image,
+      docId
+    })
+    setSubmitActive(true)
+    navigate('/new-product')
+  }
+  const removeProduct = async () => {
+    await deleteProduct(docId)
+    getProducts()
+  }
   return (
     <Container>
       <picture>
-        <img src={image} alt='' />
+        <img src={image[0]} alt='' />
       </picture>
       <Content>
         <h4>{title}</h4>
@@ -18,10 +51,10 @@ function Item({ title, description, discountedPrice, normalPrice, image }) {
         <PriceC>
           {currentUser && (
             <ButtonsC>
-              <button onClick={() => navigate('/new-product')}>
+              <button onClick={updateProduct}>
                 <UilPen size='24' />
               </button>
-              <button onClick={() => navigate('/new-product')}>
+              <button onClick={removeProduct}>
                 <UilTrashAlt size='24' />
               </button>
             </ButtonsC>

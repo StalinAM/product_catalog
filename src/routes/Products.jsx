@@ -11,11 +11,26 @@ import {
   UilBookOpen
 } from '@iconscout/react-unicons'
 import ListProducts from '../components/ListProducts'
+import { EditProductConext } from '../context/EditProduct'
 
-function Products({ product, setProduct }) {
+function Products() {
   const navigate = useNavigate()
   const { currentUser } = useContext(AuthContext)
+  const { setSubmitActive, setProduct } = useContext(EditProductConext)
   const [active, setActive] = useState(false)
+  const createProduct = async () => {
+    setProduct({
+      title: '',
+      description: '',
+      category: '',
+      discounted_price: 0,
+      normal_price: 0,
+      product_details: '',
+      images_urls: ''
+    })
+    setSubmitActive(false)
+    navigate('/new-product')
+  }
   return (
     <MainC>
       <h2>Catálogo de productos</h2>
@@ -26,7 +41,7 @@ function Products({ product, setProduct }) {
             <Input placeholder='Buscar por nombre' />
           </InputC>
           {currentUser ? (
-            <FilterBtn onClick={() => navigate('/new-product')}>
+            <FilterBtn onClick={createProduct}>
               <UilFilePlus size='28' />
             </FilterBtn>
           ) : (
