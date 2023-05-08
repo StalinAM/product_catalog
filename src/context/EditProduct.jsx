@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useState } from 'react'
 export const EditProductConext = createContext()
 function EditProduct({ children }) {
   const [product, setProduct] = useState({
@@ -11,11 +11,7 @@ function EditProduct({ children }) {
     images_urls: ''
   })
   const [submitActive, setSubmitActive] = useState(false)
-  useEffect(() => {
-    if (submitActive) {
-      return
-    }
-  }, [submitActive])
+
   return (
     <EditProductConext.Provider
       value={{ product, setProduct, submitActive, setSubmitActive }}
