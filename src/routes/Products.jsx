@@ -88,7 +88,7 @@ const Content = styled.section`
     width: 90%;
     margin: 0 auto;
     & > section {
-      gap: 2rem;
+      gap: 1.5rem;
     }
   }
 `
@@ -98,8 +98,6 @@ const FilterC = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  @media screen and (min-width: 768px) {
-  }
 `
 const FilterBtn = styled.button`
   width: 2.5rem;
