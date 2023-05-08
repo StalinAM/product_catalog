@@ -46,8 +46,10 @@ function Item({
         <img src={image[0]} alt='' />
       </picture>
       <Content>
-        <h4>{title}</h4>
-        <p>{description}</p>
+        <Text>
+          <h4>{title}</h4>
+          <p>{description}</p>
+        </Text>
         <PriceC>
           {currentUser && (
             <ButtonsC>
@@ -72,35 +74,33 @@ function Item({
 export default Item
 
 const Container = styled.article`
-  position: relative;
-  height: 450px;
   display: flex;
-  justify-content: center;
-  padding: 0 0.5rem;
+  flex-direction: column;
+  background-color: ${(props) => props.theme.white};
+  border-radius: 18px;
+  overflow: hidden;
+  height: 100%;
   picture {
-    width: 70%;
-    position: absolute;
-    bottom: 170px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    border-radius: 18px;
-    overflow: hidden;
-    border: 4px solid ${(props) => props.theme.gray_300};
-  }
-  @media screen and (min-width: 768px) {
-    picture {
-      bottom: 160px;
+    width: 100%;
+    padding: 1rem;
+    img {
+      border-radius: 18px;
     }
   }
 `
 const Content = styled.section`
-  margin-top: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1rem 1rem;
+  border-radius: 18px;
+  justify-content: space-between;
+`
+const Text = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 4rem 1rem 1rem;
-  border-radius: 18px;
-  background-color: ${(props) => props.theme.white};
   h4 {
     text-transform: capitalize;
     font-weight: 500;
@@ -115,15 +115,6 @@ const Content = styled.section`
     font-weight: 400;
     color: ${(props) => props.theme.gray_400};
     font-size: ${(props) => props.theme.font_14};
-  }
-
-  @media screen and (min-width: 768px) {
-    h4 {
-      font-size: ${(props) => props.theme.font_18};
-    }
-    p {
-      font-size: ${(props) => props.theme.font_16};
-    }
   }
 `
 const PriceC = styled.div`
@@ -145,14 +136,6 @@ const PriceC = styled.div`
     font-weight: 400;
     font-size: ${(props) => props.theme.font_14};
   }
-  @media screen and (min-width: 768px) {
-    span {
-      font-size: ${(props) => props.theme.font_22};
-    }
-    span > span {
-      font-size: ${(props) => props.theme.font_16};
-    }
-  }
 `
 const ButtonsC = styled.div`
   display: flex;
@@ -163,8 +146,8 @@ const ButtonsC = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.125rem;
+    height: 2.125rem;
     background-color: ${(props) => props.theme.gray_300};
     svg {
       fill: ${(props) => props.theme.pink_400};
