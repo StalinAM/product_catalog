@@ -2,7 +2,14 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, db, storage } from './firebase'
 import { v4 } from 'uuid'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import { addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore'
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc
+} from 'firebase/firestore'
 
 // LOGIN
 export const loginUser = async (email, password, navigate) => {
