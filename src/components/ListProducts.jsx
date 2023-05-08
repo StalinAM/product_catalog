@@ -30,9 +30,10 @@ export default ListProducts
 
 const Container = styled.ul`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 400px));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 275px));
   justify-content: center;
   gap: 1.5rem;
+  padding: 0 1.5rem;
   @media screen and (min-width: 768px) {
     gap: 2rem;
   }
