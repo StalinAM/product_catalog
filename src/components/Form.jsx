@@ -1,11 +1,11 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { UilCheck } from '@iconscout/react-unicons'
 import { Button, Input, InputsC, Label } from '../styles/CommonStyles'
 import { EditProductConext } from '../context/EditProduct'
+import { uploadImages } from '../firebase/services'
 
-function Form({ handleSubmit, name, imagesUrls, setImagesUrls }) {
-  const inputRef = useRef()
+function Form({ handleSubmit, name, imagesUrls, setImagesUrls, inputRef }) {
   const { product, setProduct } = useContext(EditProductConext)
 
   const handleInputChange = (e) => {

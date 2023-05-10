@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { UilAngleLeft } from '@iconscout/react-unicons'
@@ -6,11 +6,14 @@ import { insertProduct, editProduct } from '../firebase/services'
 import { Back, MainC } from '../styles/CommonStyles'
 import Form from '../components/Form'
 import { EditProductConext } from '../context/EditProduct'
+import { FetchProductsContext } from '../context/FetchProducts'
 
 function NewProduct() {
   const navigate = useNavigate()
   const [imagesUrls, setImagesUrls] = useState(null)
   const { product, submitActive } = useContext(EditProductConext)
+  const { getProducts } = useContext(FetchProductsContext)
+  const inputRef = useRef()
 
   const updateProduct = async () => {
     if (
@@ -22,8 +25,9 @@ function NewProduct() {
       product.product_details &&
       product.images_urls
     ) {
-      await editProduct(docId, { ...product })
+      await editProduct(product.docId, { ...product })
     }
+    getProducts()
   }
   const addProduct = async () => {
     if (
@@ -37,18 +41,21 @@ function NewProduct() {
     ) {
       await insertProduct({ ...product })
     }
+    getProducts()
   }
-  const handleSubmit = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault()
     updateProduct()
     setImagesUrls(null)
     inputRef.current.value = ''
+    navigate('/catalog')
   }
-  const handleUpdate = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     addProduct()
     setImagesUrls(null)
     inputRef.current.value = ''
+    navigate('/catalog')
   }
   return (
     <MainC>
@@ -63,6 +70,7 @@ function NewProduct() {
         name={submitActive ? 'Actualizar' : 'Subir'}
         imagesUrls={imagesUrls}
         setImagesUrls={setImagesUrls}
+        inputRef={inputRef}
       />
     </MainC>
   )
