@@ -126,7 +126,7 @@ const Text = styled.p`
   display: none;
   @media screen and (min-width: 768px) {
     display: block;
-    font-size: ${(props) => props.theme.font_20};
+    font-size: ${(props) => props.theme.font_18};
     font-weight: 500;
     color: ${(props) => props.theme.black};
   }
