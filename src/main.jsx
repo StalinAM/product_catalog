@@ -5,13 +5,16 @@ import App from './App'
 import Auth from './context/Auth'
 import EditProduct from './context/EditProduct'
 import FetchProducts from './context/FetchProducts'
+import ShoppingCartItems from './context/ShoppingCartItems'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Auth>
       <FetchProducts>
         <EditProduct>
-          <App />
+          <ShoppingCartItems>
+            <App />
+          </ShoppingCartItems>
         </EditProduct>
       </FetchProducts>
     </Auth>
