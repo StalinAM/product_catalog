@@ -1,28 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Button, ButtonC, MainC } from '../styles/CommonStyles'
-import img1 from '../assets/1.webp'
-import img2 from '../assets/2.webp'
-import img3 from '../assets/3.webp'
-import img4 from '../assets/4.webp'
+import { useContext } from 'react'
+import { FetchProductsContext } from '../context/FetchProducts'
+import { useParams } from 'react-router-dom'
 
 function ProductDescription() {
+  const { id } = useParams()
+  const { listProducts } = useContext(FetchProductsContext)
+  const product = listProducts?.find((item) => item.docId === id)
   return (
     <MainC>
       <h2>Información del producto</h2>
       <Content>
         <article>
           <SlideC>
-            <img src={img1} alt='' />
-            <img src={img2} alt='' />
-            <img src={img3} alt='' />
-            <img src={img4} alt='' />
+            {product.images_urls?.map((image, index) => (
+              <img key={index} src={image} alt='' />
+            ))}
           </SlideC>
-          <h3>Camiseta calabera</h3>
-          <p>
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout.
-          </p>
+          <h3>{product.title}</h3>
+          <p>{product.description}</p>
           <div>
             <NumberP>
               <ButtonC>
@@ -34,7 +32,7 @@ function ProductDescription() {
               </ButtonC>
             </NumberP>
             <Price>
-              $20 <span>$19.99</span>
+              {product.discounted_price} <span>{product.normal_price}</span>
             </Price>
           </div>
           <BtnC>
@@ -46,25 +44,7 @@ function ProductDescription() {
             <i className='uil uil-align-justify' />
             <h4>Detalles del producto</h4>
           </header>
-          <p>
-            ¡Destaca entre la multitud con esta camiseta negra con estampado de
-            un cráneo de calavera! Esta prenda de alta calidad es perfecta para
-            aquellos que buscan un estilo único y atrevido. <br />
-            <br />
-            El cráneo de calavera impreso en la camiseta es un diseño
-            impresionante que sin duda llamará la atención. Además, la camiseta
-            está hecha de materiales de alta calidad que garantizan una gran
-            durabilidad y comodidad, lo que la convierte en una excelente opción
-            para el uso diario. <br />
-            <br />
-            Ya sea para un concierto, una fiesta o simplemente para destacar en
-            la calle, esta camiseta es la elección perfecta para aquellos que
-            buscan algo diferente.
-            <br />
-            <br />
-            ¡Haz una declaración de moda con esta camiseta negra con estampado
-            de un cráneo de calavera hoy mismo!
-          </p>
+          <p>{product.product_details}</p>
         </DetailsP>
       </Content>
     </MainC>
@@ -93,6 +73,7 @@ const Content = styled.div`
       word-wrap: normal;
     }
     p {
+      margin-right: auto;
       font-size: ${(props) => props.theme.font_14};
     }
     p + div {
@@ -217,7 +198,8 @@ const Price = styled.p`
   flex-direction: column;
   font-size: ${(props) => props.theme.font_24} !important;
   align-items: flex-end;
-  color: ${(props) => props.theme.black};
+  color: ${(props) => props.theme.pink_400};
+  margin-right: 0 !important;
   font-weight: bold;
   span {
     font-weight: 500;
@@ -226,9 +208,5 @@ const Price = styled.p`
     font-size: ${(props) => props.theme.font_16};
   }
   @media screen and (min-width: 768px) {
-    font-size: ${(props) => props.theme.font_28} !important;
-    span {
-      font-size: ${(props) => props.theme.font_20};
-    }
   }
 `
