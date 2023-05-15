@@ -102,7 +102,6 @@ const Text = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   h4 {
-    text-transform: capitalize;
     font-weight: 500;
     overflow: hidden;
     white-space: nowrap;
@@ -111,7 +110,6 @@ const Text = styled.div`
     font-size: ${(props) => props.theme.font_16};
   }
   p {
-    text-transform: capitalize;
     font-weight: 400;
     color: ${(props) => props.theme.gray_400};
     font-size: ${(props) => props.theme.font_14};
