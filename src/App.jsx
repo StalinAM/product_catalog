@@ -22,6 +22,7 @@ function App() {
           <Route path='new-product' element={<NewProduct />} />
           <Route path='shopping-cart' element={<ShoppingCart />} />
           <Route path='catalog' element={<Products />} />
+          <Route path='/catalog/:id' element={<ProductDescription />} />
         </Routes>
       </ThemeProvider>
     </>
