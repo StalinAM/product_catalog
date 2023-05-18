@@ -1,14 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Button, ButtonC, MainC } from '../styles/CommonStyles'
 import { useContext } from 'react'
 import { FetchProductsContext } from '../context/FetchProducts'
 import { useParams } from 'react-router-dom'
+import { UilPlus, UilMinus } from '@iconscout/react-unicons'
+import { ShoppingCartItemsContext } from '../context/ShoppingCartItems'
 
 function ProductDescription() {
+  const { shoppingCartItems, setShoppingCartItems } = useContext(
+    ShoppingCartItemsContext
+  )
   const { id } = useParams()
   const { listProducts } = useContext(FetchProductsContext)
   const product = listProducts?.find((item) => item.docId === id)
+  const [quantity, setQuantity] = useState(1)
+  const add = () => {
+    setQuantity((quantity) => quantity + 1)
+  }
+  const remove = () => {
+    if (quantity > 1) {
+      setQuantity((quantity) => quantity - 1)
+    }
+  }
+  const addProduct = () => {
+    const productFound = shoppingCartItems.find(
+      (item) => item.docId === product.docId
+    )
+    const newItem = {}
+    if (productFound) {
+      productFound.quantity = quantity
+    }
+    shoppingCartItems.map((item) => {
+      if (item.uid === product.docId) {
+        item.quantity = quantity
+      } else {
+        console.log('hola')
+        newItem = {
+          title: product.title,
+          description: product.description,
+          image: product.images_urls[0],
+          price: product.discounted_price,
+          uid: product.docId,
+          quantity
+        }
+        setShoppingCartItems((product) => [...product, newItem])
+      }
+    })
+    console.log(shoppingCartItems)
+  }
   return (
     <MainC>
       <h2>Información del producto</h2>
@@ -23,12 +63,12 @@ function ProductDescription() {
           <p>{product.description}</p>
           <div>
             <NumberP>
-              <ButtonC>
-                <i className='uil uil-minus' />
+              <ButtonC onClick={remove}>
+                <UilMinus size='20' />
               </ButtonC>
-              <span>1</span>
-              <ButtonC>
-                <i className='uil uil-plus' />
+              <span>{quantity}</span>
+              <ButtonC onClick={add}>
+                <UilPlus size='20' />
               </ButtonC>
             </NumberP>
             <Price>
@@ -36,7 +76,7 @@ function ProductDescription() {
             </Price>
           </div>
           <BtnC>
-            <Button>Añadir al carro</Button>
+            <Button onClick={addProduct}>Añadir al carro</Button>
           </BtnC>
         </article>
         <DetailsP>
@@ -143,10 +183,13 @@ const NumberP = styled.div`
   width: fit-content;
   border-radius: 18px;
   height: 28px;
-  gap: 0.5rem;
-  background-color: ${(props) => props.theme.white};
+  gap: 0.75rem;
+  span {
+    font-size: ${(props) => props.theme.font_20};
+    font-weight: bold;
+  }
   @media screen and (min-width: 768px) {
-    gap: 0.75rem;
+    gap: 1rem;
     height: 34px;
   }
 `
