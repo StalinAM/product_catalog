@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { ShoppingCartItemsContext } from '../context/ShoppingCartItems'
 
 function Menu() {
+  const { numItem } = useContext(ShoppingCartItemsContext)
   const DATA = [
     { id: 1, link: '/', title: 'Inicio', icon: 'uil uil-estate' },
     {
@@ -28,7 +30,7 @@ function Menu() {
             <Item key={item.id}>
               <Link to={item.link}>
                 <Text>{item.title}</Text>
-                {item.id === 3 && <NumProduct>5</NumProduct>}
+                {item.id === 3 && <NumProduct>{numItem}</NumProduct>}
                 <Icon className={`uil uil-${item.icon}`} />
               </Link>
             </Item>
