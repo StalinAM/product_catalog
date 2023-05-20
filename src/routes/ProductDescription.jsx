@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Button, ButtonC, MainC } from '../styles/CommonStyles'
+import { Back, Button, ButtonC, MainC } from '../styles/CommonStyles'
 import { useContext } from 'react'
 import { FetchProductsContext } from '../context/FetchProducts'
-import { useParams } from 'react-router-dom'
-import { UilPlus, UilMinus } from '@iconscout/react-unicons'
+import { useNavigate, useParams } from 'react-router-dom'
+import { UilPlus, UilMinus, UilAngleLeft } from '@iconscout/react-unicons'
 import { ShoppingCartItemsContext } from '../context/ShoppingCartItems'
 
 function ProductDescription() {
   const { shoppingCartItems, setShoppingCartItems } = useContext(
     ShoppingCartItemsContext
   )
+  const navigate = useNavigate()
   const { id } = useParams()
   const { listProducts } = useContext(FetchProductsContext)
   const product = listProducts?.find((item) => item.docId === id)
@@ -51,7 +52,12 @@ function ProductDescription() {
   }
   return (
     <MainC>
-      <h2>Información del producto</h2>
+      <Header>
+        <Back onClick={() => navigate('/catalog')}>
+          <UilAngleLeft size='38' />
+        </Back>
+        <h2>Información del producto</h2>
+      </Header>
       <Content>
         <article>
           <SlideC>
@@ -152,6 +158,10 @@ const Content = styled.div`
       width: 80%;
     }
   }
+`
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 const SlideC = styled.div`
   width: 100%;
