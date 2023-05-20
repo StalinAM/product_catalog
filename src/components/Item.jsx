@@ -5,7 +5,7 @@ import { UilPen, UilTrashAlt } from '@iconscout/react-unicons'
 import { deleteProduct, editProduct } from '../firebase/services'
 import { FetchProductsContext } from '../context/FetchProducts'
 import { EditProductConext } from '../context/EditProduct'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Item({
   title,
@@ -42,12 +42,16 @@ function Item({
   }
   return (
     <Container>
-      <picture>
-        <img src={image[0]} alt='' />
-      </picture>
+      <Link to={`/catalog/${docId}`}>
+        <picture>
+          <img src={image[0]} alt='' />
+        </picture>
+      </Link>
       <Content>
         <Text>
-          <h4>{title}</h4>
+          <Link to={`/catalog/${docId}`}>
+            <h4>{title}</h4>
+          </Link>
           <p>{description}</p>
         </Text>
         <PriceC>
@@ -108,6 +112,10 @@ const Text = styled.div`
     text-overflow: ellipsis;
     word-wrap: normal;
     font-size: ${(props) => props.theme.font_16};
+    cursor: pointer;
+    &:hover {
+      color: ${(props) => props.theme.pink_400};
+    }
   }
   p {
     font-weight: 400;
