@@ -1,15 +1,10 @@
 import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { FetchProductsContext } from '../context/FetchProducts'
 import Item from './Item'
 
 function ListProducts() {
   const { listProducts } = useContext(FetchProductsContext)
-  const navigate = useNavigate()
-  function handleClick(id) {
-    navigate(`/catalog/${id}`)
-  }
   return (
     <Container>
       {listProducts &&
