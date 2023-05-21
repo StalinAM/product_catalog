@@ -26,29 +26,22 @@ function ProductDescription() {
   }
   const addProduct = () => {
     const productFound = shoppingCartItems.find(
-      (item) => item.docId === product.docId
+      (item) => item.uid === product.docId
     )
-    const newItem = {}
+    let newItem = {}
     if (productFound) {
       productFound.quantity = quantity
-    }
-    shoppingCartItems.map((item) => {
-      if (item.uid === product.docId) {
-        item.quantity = quantity
-      } else {
-        console.log('hola')
-        newItem = {
-          title: product.title,
-          description: product.description,
-          image: product.images_urls[0],
-          price: product.discounted_price,
-          uid: product.docId,
-          quantity
-        }
-        setShoppingCartItems((product) => [...product, newItem])
+    } else {
+      newItem = {
+        title: product.title,
+        description: product.description,
+        image: product.images_urls[0],
+        price: product.discounted_price,
+        uid: product.docId,
+        quantity
       }
-    })
-    console.log(shoppingCartItems)
+      setShoppingCartItems((product) => [...product, newItem])
+    }
   }
   return (
     <MainC>
