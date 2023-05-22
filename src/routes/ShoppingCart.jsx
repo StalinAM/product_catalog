@@ -1,85 +1,96 @@
-import React, { useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Button, ButtonC, Line, MainC } from '../styles/CommonStyles'
-import product from '../assets/product.jpg'
-import product2 from '../assets/product2.webp'
 import PaymentTypeModal from '../components/PaymentTypeModal'
 import { UilPlus, UilMinus, UilTrashAlt } from '@iconscout/react-unicons'
+import { ShoppingCartItemsContext } from '../context/ShoppingCartItems'
+import { Link } from 'react-router-dom'
 
 function ShoppingCart() {
   const [active, setActive] = useState(false)
+  const [totalPayable, setTotalPayable] = useState(0)
+  const { shoppingCartItems, setShoppingCartItems, numItem } = useContext(
+    ShoppingCartItemsContext
+  )
+  useEffect(() => {
+    setTotalPayable(
+      shoppingCartItems.reduce(
+        (acumulator, item) => acumulator + item.price * item.quantity,
+        0
+      )
+    )
+  }, [numItem])
+
+  const removeItem = (index) => {
+    const updateItems = [...shoppingCartItems]
+    updateItems.splice(index, 1)
+    setShoppingCartItems(updateItems)
+  }
+  const incrementNum = (index) => {
+    const updateItems = [...shoppingCartItems]
+    updateItems[index].quantity++
+    setShoppingCartItems(updateItems)
+  }
+  const decrementNum = (index) => {
+    const updateItems = [...shoppingCartItems]
+    if (updateItems[index].quantity > 1) {
+      updateItems[index].quantity--
+      setShoppingCartItems(updateItems)
+    }
+  }
   return (
     <MainC>
       <h2>Carro de compras</h2>
       <Content>
         <ListProducts>
-          <li>
-            <Product>
-              <picture>
-                <img src={product} alt='' />
-              </picture>
-              <section>
-                <h3>Esponjas de belleza</h3>
-                <p>
-                  Esponja de maquillaje para complexión, (4 paquetes de 8, 32
-                  unidades en total).
-                </p>
-                <span>$10.14</span>
-                <EditProduct>
-                  <NumberP>
-                    <ButtonC>
-                      <UilMinus size='20' />
-                    </ButtonC>
-                    <span>1</span>
-                    <ButtonC>
-                      <UilPlus size='20' />
-                    </ButtonC>
-                  </NumberP>
-                  <ButtonC>
-                    <UilTrashAlt size='22' />
-                  </ButtonC>
-                </EditProduct>
-              </section>
-            </Product>
-          </li>
-          <li>
-            <Product>
-              <picture>
-                <img src={product2} alt='' />
-              </picture>
-              <section>
-                <h3>Zapatillas de deporte de verano</h3>
-                <p>
-                  chanclas de plataforma de fondo grueso, sandalias deportivas
-                  unisex con agujeros de Eva suave.
-                </p>
-                <span>$18.99</span>
-                <EditProduct>
-                  <NumberP>
-                    <ButtonC>
-                      <UilMinus size='20' />
-                    </ButtonC>
-                    <span>1</span>
-                    <ButtonC>
-                      <UilPlus size='20' />
-                    </ButtonC>
-                  </NumberP>
-                  <ButtonC>
-                    <UilTrashAlt size='22' />
-                  </ButtonC>
-                </EditProduct>
-              </section>
-            </Product>
-          </li>
+          {shoppingCartItems.length > 0 ? (
+            shoppingCartItems.map((item, index) => (
+              <li key={item.image}>
+                <Product>
+                  <picture>
+                    <img src={item.image} alt='' />
+                  </picture>
+                  <section>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    <span>${(item.price * item.quantity).toFixed(2)}</span>
+                    <EditProduct>
+                      <NumberP>
+                        <ButtonC onClick={() => decrementNum(index)}>
+                          <UilMinus size='20' />
+                        </ButtonC>
+                        <span>{item.quantity}</span>
+                        <ButtonC onClick={() => incrementNum(index)}>
+                          <UilPlus size='20' />
+                        </ButtonC>
+                      </NumberP>
+                      <ButtonC onClick={() => removeItem(index)}>
+                        <UilTrashAlt size='22' />
+                      </ButtonC>
+                    </EditProduct>
+                  </section>
+                </Product>
+              </li>
+            ))
+          ) : (
+            <p>
+              No hay productos en tu carrito.{' '}
+              <Link to={'/catalog'}>Sigue explorando.</Link>
+            </p>
+          )}
         </ListProducts>
         <Line />
         <Total>
           <p>Total a pagar:</p>
-          <span>$29.13</span>
+          <span>${totalPayable.toFixed(2)}</span>
         </Total>
         <BtnC>
           {active && <PaymentTypeModal setActive={setActive} />}
-          <Button onClick={() => setActive(true)}>Continuar</Button>
+          {shoppingCartItems.length > 0 ? (
+            <Button onClick={() => setActive(true)}>Continuar</Button>
+          ) : (
+            <></>
+          )}
         </BtnC>
       </Content>
     </MainC>
@@ -173,12 +184,18 @@ const ListProducts = styled.ul`
   flex-direction: column;
   gap: 1.5rem;
   margin-bottom: 0.5rem;
+  & > p {
+    font-size: ${(props) => props.theme.font_18};
+  }
+  p > a {
+    color: ${(props) => props.theme.pink_500};
+  }
 `
 const Total = styled.div`
   display: flex;
   justify-content: space-between;
   font-weight: bold;
-  font-size: ${(props) => props.theme.font_16};
+  font-size: ${(props) => props.theme.font_18};
   @media screen and (min-width: 768px) {
     font-size: ${(props) => props.theme.font_20};
   }
