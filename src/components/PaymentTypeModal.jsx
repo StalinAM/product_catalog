@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import {
   Button,
@@ -11,6 +11,15 @@ import {
 import { UilInfoCircle } from '@iconscout/react-unicons'
 
 function PaymentTypeModal({ setActive }) {
+  const [purcherData, setPurcherData] = useState({})
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setPurcherData((prevState) => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+  const sendOrder = () => {}
   return (
     <Backdrop>
       <Modal>
@@ -18,17 +27,32 @@ function PaymentTypeModal({ setActive }) {
         <FormC action=''>
           <InputsC>
             <Label htmlFor='name'>Nombre</Label>
-            <Input type='text' placeholder='Ingrese su nombre' />
+            <Input
+              name='name'
+              type='text'
+              placeholder='Ingrese su nombre'
+              onChange={handleInputChange}
+            />
           </InputsC>
           <InputsC>
             <Label>Tipo de pago</Label>
             <RadioBtnsC>
               <RadioBtn>
-                <input type='radio' name='contract' />
+                <input
+                  type='radio'
+                  name='contract'
+                  value={'transferencia'}
+                  onChange={handleInputChange}
+                />
                 <span>Transferencia</span>
               </RadioBtn>
               <RadioBtn>
-                <input type='radio' name='contract' />
+                <input
+                  type='radio'
+                  name='contract'
+                  value={'efectivo'}
+                  onChange={handleInputChange}
+                />
                 <span>Efectivo</span>
               </RadioBtn>
             </RadioBtnsC>
