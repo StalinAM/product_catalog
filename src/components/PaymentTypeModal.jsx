@@ -19,12 +19,20 @@ function PaymentTypeModal({ setActive }) {
       [name]: value
     }))
   }
-  const sendOrder = () => {}
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const { name, contract } = purcherData
+    const message = `¡Hola! Quiero realizar una compra. Mi nombre es ${name} y quiero pagar mediante ${contract}. Los productos`
+    const encodedMessage = encodeURIComponent(message)
+    const whatsappLink = `https://wa.me/593978657839?text=${encodedMessage}`
+
+    window.open(whatsappLink, '_blank')
+  }
   return (
     <Backdrop>
       <Modal>
         <h4>Información adicional</h4>
-        <FormC action=''>
+        <FormC onSubmit={handleSubmit}>
           <InputsC>
             <Label htmlFor='name'>Nombre</Label>
             <Input
@@ -67,7 +75,7 @@ function PaymentTypeModal({ setActive }) {
             </span>
           </Information>
           <ButtonsC>
-            <Button>Enviar</Button>
+            <Button type='submit'>Enviar</Button>
             <Button onClick={() => setActive(false)}>Cancelar</Button>
           </ButtonsC>
         </FormC>
