@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import {
   Button,
@@ -9,9 +9,11 @@ import {
   Backdrop
 } from '../styles/CommonStyles'
 import { UilInfoCircle } from '@iconscout/react-unicons'
+import { ShoppingCartItemsContext } from '../context/ShoppingCartItems'
 
 function PaymentTypeModal({ setActive }) {
   const [purcherData, setPurcherData] = useState({})
+  const { shoppingCartItems } = useContext(ShoppingCartItemsContext)
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setPurcherData((prevState) => ({
@@ -22,7 +24,20 @@ function PaymentTypeModal({ setActive }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     const { name, contract } = purcherData
-    const message = `¡Hola! Quiero realizar una compra. Mi nombre es ${name} y quiero pagar mediante ${contract}. Los productos`
+    const cartItems = shoppingCartItems.map((item) => ({
+      title: item.title,
+      quantity: item.quantity,
+      totalPrice: item.quantity * item.price
+    }))
+    const itemsMessage = cartItems
+      .map((item) => `- ${item.title}: ${item.quantity}`)
+      .join('\n')
+    const totalPrice = cartItems
+      .map((item) => item.totalPrice)
+      .reduce((total, current) => total + current, 0)
+    const message = `¡Hola! Quiero realizar una compra. Mi nombre es ${name} y quiero pagar mediante ${contract}. Los productos:\n${itemsMessage}\n Total: ${totalPrice.toFixed(
+      2
+    )}$`
     const encodedMessage = encodeURIComponent(message)
     const whatsappLink = `https://wa.me/593978657839?text=${encodedMessage}`
 
