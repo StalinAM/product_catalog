@@ -12,12 +12,14 @@ import {
 } from '@iconscout/react-unicons'
 import ListProducts from '../components/ListProducts'
 import { EditProductConext } from '../context/EditProduct'
+import { FetchProductsContext } from '../context/FetchProducts'
 
 function Products() {
   const navigate = useNavigate()
   const { currentUser } = useContext(AuthContext)
   const { setSubmitActive, setProduct } = useContext(EditProductConext)
   const [active, setActive] = useState(false)
+  const { listProducts } = useContext(FetchProductsContext)
   const createProduct = async () => {
     setProduct({
       title: '',
@@ -55,17 +57,19 @@ function Products() {
             <UilRocket size='28' />
             Mas Recientes
           </Title>
-          <ListProducts />
+          <ListProducts listProducts={listProducts} />
         </section>
         <section>
           <Title>
             <UilBookOpen size='28' />
             Todos los productos
           </Title>
-          <ListProducts />
+          <ListProducts listProducts={listProducts} />
         </section>
       </Content>
-      {active && <FilterModal setActive={setActive} />}
+      {active && (
+        <FilterModal listProducts={listProducts} setActive={setActive} />
+      )}
     </MainC>
   )
 }
