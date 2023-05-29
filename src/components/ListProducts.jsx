@@ -1,10 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { FetchProductsContext } from '../context/FetchProducts'
 import Item from './Item'
 
-function ListProducts() {
-  const { listProducts } = useContext(FetchProductsContext)
+function ListProducts({ listProducts }) {
   return (
     <Container>
       {listProducts &&
