@@ -112,6 +112,7 @@ export const RadioBtn = styled.label`
     font-weight: bold;
     font-size: ${(props) => props.theme.font_16};
     background-color: ${(props) => props.theme.white};
+    text-transform: capitalize;
     &:hover {
       box-shadow: 0px 0px 0px 3px ${(props) => props.theme.pink_400} inset;
     }
