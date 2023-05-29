@@ -1,4 +1,6 @@
 import React from 'react'
+import { useState } from 'react'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import {
   Backdrop,
@@ -8,7 +10,13 @@ import {
   RadioBtn
 } from '../styles/CommonStyles'
 
-function FilterModal({ setActive }) {
+function FilterModal({ setActive, listProducts }) {
+  const [listCategory, setlistCategory] = useState([])
+  useEffect(() => {
+    const category = [...new Set(listProducts.map((item) => item.category))]
+    setlistCategory(category)
+  }, [])
+  console.log(listCategory)
   return (
     <Backdrop>
       <FormC>
@@ -16,14 +24,12 @@ function FilterModal({ setActive }) {
         <InputsC>
           <Label>Seleccione una categoría</Label>
           <RadioBtnsC>
-            <RadioBtn>
-              <input type='radio' name='contract' />
-              <span>Hogar</span>
-            </RadioBtn>
-            <RadioBtn>
-              <input type='radio' name='contract' />
-              <span>Maquillaje</span>
-            </RadioBtn>
+            {listCategory.map((item) => (
+              <RadioBtn key={item}>
+                <input type='radio' name={item} />
+                <span>{item}</span>
+              </RadioBtn>
+            ))}
           </RadioBtnsC>
         </InputsC>
         <ButtonsC>
