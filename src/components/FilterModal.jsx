@@ -26,7 +26,7 @@ function FilterModal({ setActive, listProducts }) {
           <RadioBtnsC>
             {listCategory.map((item) => (
               <RadioBtn key={item}>
-                <input type='radio' name={item} />
+                <input type='radio' name='category' />
                 <span>{item}</span>
               </RadioBtn>
             ))}
