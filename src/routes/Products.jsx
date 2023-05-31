@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { MainC, Input } from '../styles/CommonStyles'
 import styled from 'styled-components'
 import { AuthContext } from '../context/Auth'
@@ -33,6 +33,19 @@ function Products() {
     setSubmitActive(false)
     navigate('/new-product')
   }
+  const [wordFilter, setWordFilter] = useState('')
+  const [listFilter, setListFilter] = useState([])
+
+  useEffect(() => {
+    const filteredList = listProducts.filter((item) =>
+      item.title.toLowerCase().includes(wordFilter.toLowerCase())
+    )
+
+    setListFilter(filteredList)
+  }, [wordFilter, listProducts])
+  const handleChange = (event) => {
+    setWordFilter(event.target.value)
+  }
   return (
     <MainC>
       <h2>Catálogo de productos</h2>
@@ -40,7 +53,7 @@ function Products() {
         <FilterC>
           <InputC>
             <i className='uil uil-search' />
-            <Input placeholder='Buscar por nombre' />
+            <Input placeholder='Buscar por nombre' onChange={handleChange} />
           </InputC>
           {currentUser ? (
             <FilterBtn onClick={createProduct}>
@@ -57,14 +70,16 @@ function Products() {
             <UilRocket size='28' />
             Mas Recientes
           </Title>
-          <ListProducts listProducts={listProducts} />
+          <ListProducts
+            listProducts={wordFilter != '' ? listFilter : listProducts}
+          />
         </section>
         <section>
           <Title>
             <UilBookOpen size='28' />
             Todos los productos
           </Title>
-          <ListProducts listProducts={listProducts} />
+          <ListProducts listProducts={listFilter} />
         </section>
       </Content>
       {active && (
