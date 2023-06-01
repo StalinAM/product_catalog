@@ -46,7 +46,7 @@ function PaymentTypeModal({ setActive }) {
   return (
     <Backdrop>
       <Modal>
-        <h4>Información adicional</h4>
+        <h4>Información extra</h4>
         <FormC onSubmit={handleSubmit}>
           <InputsC>
             <Label htmlFor='name'>Nombre</Label>
