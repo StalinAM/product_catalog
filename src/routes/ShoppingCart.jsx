@@ -5,9 +5,11 @@ import PaymentTypeModal from '../components/PaymentTypeModal'
 import { UilPlus, UilMinus, UilTrashAlt } from '@iconscout/react-unicons'
 import { ShoppingCartItemsContext } from '../context/ShoppingCartItems'
 import { Link } from 'react-router-dom'
+import Congratulations from '../components/ThanksModal'
 
 function ShoppingCart() {
   const [active, setActive] = useState(false)
+  const [activeThanks, setActiveThanks] = useState(false)
   const [totalPayable, setTotalPayable] = useState(0)
   const { shoppingCartItems, setShoppingCartItems, numItem } = useContext(
     ShoppingCartItemsContext
@@ -85,11 +87,19 @@ function ShoppingCart() {
           <span>${totalPayable.toFixed(2)}</span>
         </Total>
         <BtnC>
-          {active && <PaymentTypeModal setActive={setActive} />}
+          {active && (
+            <PaymentTypeModal
+              setActive={setActive}
+              setActiveThanks={setActiveThanks}
+            />
+          )}
           {shoppingCartItems.length > 0 ? (
             <Button onClick={() => setActive(true)}>Continuar</Button>
           ) : (
             <></>
+          )}
+          {activeThanks && (
+            <Congratulations setShoppingCartItems={setShoppingCartItems} />
           )}
         </BtnC>
       </Content>
