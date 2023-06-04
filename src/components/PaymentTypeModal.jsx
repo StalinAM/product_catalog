@@ -11,7 +11,7 @@ import {
 import { UilInfoCircle } from '@iconscout/react-unicons'
 import { ShoppingCartItemsContext } from '../context/ShoppingCartItems'
 
-function PaymentTypeModal({ setActive }) {
+function PaymentTypeModal({ setActive, setActiveThanks }) {
   const [purcherData, setPurcherData] = useState({})
   const { shoppingCartItems } = useContext(ShoppingCartItemsContext)
   const handleInputChange = (e) => {
@@ -42,6 +42,10 @@ function PaymentTypeModal({ setActive }) {
     const whatsappLink = `https://wa.me/593978657839?text=${encodedMessage}`
 
     window.open(whatsappLink, '_blank')
+    setTimeout(() => {
+      setActiveThanks(true)
+      setActive(false)
+    }, 5000)
   }
   return (
     <Backdrop>
