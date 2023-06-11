@@ -10,23 +10,39 @@ import {
   RadioBtn
 } from '../styles/CommonStyles'
 
-function FilterModal({ setActive, listProducts }) {
+function FilterModal({ setActive, setCategory, listProductsOrigin }) {
+  const [seelectedCategory, setSeelectedCategory] = useState('')
   const [listCategory, setlistCategory] = useState([])
   useEffect(() => {
-    const category = [...new Set(listProducts.map((item) => item.category))]
-    setlistCategory(category)
+    const category = [
+      ...new Set(listProductsOrigin.map((item) => item.category))
+    ]
+    setlistCategory([...category, 'todos'])
   }, [])
-  console.log(listCategory)
+
+  const handleInputChange = (e) => {
+    setSeelectedCategory(e.target.value)
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setCategory(seelectedCategory)
+    setActive(false)
+  }
   return (
     <Backdrop>
-      <FormC>
+      <FormC onSubmit={handleSubmit}>
         <h4>Categorías</h4>
         <InputsC>
           <Label>Seleccione una categoría</Label>
           <RadioBtnsC>
             {listCategory.map((item) => (
               <RadioBtn key={item}>
-                <input type='radio' name='category' />
+                <input
+                  type='radio'
+                  name='category'
+                  value={item}
+                  onChange={handleInputChange}
+                />
                 <span>{item}</span>
               </RadioBtn>
             ))}
