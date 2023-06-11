@@ -19,7 +19,9 @@ function Products() {
   const { currentUser } = useContext(AuthContext)
   const { setSubmitActive, setProduct } = useContext(EditProductConext)
   const [active, setActive] = useState(false)
-  const { listProducts } = useContext(FetchProductsContext)
+
+  const { listProducts, listProductsOrigin, setWordFilter, setCategory } =
+    useContext(FetchProductsContext)
   const createProduct = async () => {
     setProduct({
       title: '',
@@ -33,16 +35,7 @@ function Products() {
     setSubmitActive(false)
     navigate('/new-product')
   }
-  const [wordFilter, setWordFilter] = useState('')
-  const [listFilter, setListFilter] = useState([])
 
-  useEffect(() => {
-    const filteredList = listProducts.filter((item) =>
-      item.title.toLowerCase().includes(wordFilter.toLowerCase())
-    )
-
-    setListFilter(filteredList)
-  }, [wordFilter, listProducts])
   const handleChange = (event) => {
     setWordFilter(event.target.value)
   }
@@ -70,20 +63,22 @@ function Products() {
             <UilRocket size='28' />
             Mas Recientes
           </Title>
-          <ListProducts
-            listProducts={wordFilter != '' ? listFilter : listProducts}
-          />
+          <ListProducts listProducts={listProducts} />
         </section>
         <section>
           <Title>
             <UilBookOpen size='28' />
             Todos los productos
           </Title>
-          <ListProducts listProducts={listFilter} />
+          <ListProducts listProducts={listProducts} />
         </section>
       </Content>
       {active && (
-        <FilterModal listProducts={listProducts} setActive={setActive} />
+        <FilterModal
+          listProductsOrigin={listProductsOrigin}
+          setActive={setActive}
+          setCategory={setCategory}
+        />
       )}
     </MainC>
   )
